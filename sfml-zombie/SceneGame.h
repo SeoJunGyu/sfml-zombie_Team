@@ -1,9 +1,12 @@
 #pragma once
 #include "Scene.h"
+
+class UiHud;
 class SceneGame :  public Scene
 {
 protected:
 	sf::Sprite cursor;
+	UiHud* uiHud;
 public:
 	SceneGame();
 	~SceneGame() override;

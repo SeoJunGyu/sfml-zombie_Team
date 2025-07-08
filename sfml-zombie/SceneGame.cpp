@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneGame.h"
 #include "TileMap.h"
+#include "UiHud.h"
 
 SceneGame::SceneGame()
 	:Scene(SceneIds::Game)
@@ -15,8 +16,13 @@ void SceneGame::Init()
 {
 	texIds.push_back("graphics/background_sheet.png");
 	texIds.push_back("graphics/crosshair.png");
+	texIds.push_back("graphics/ammo_icon.png");
+	fontIds.push_back("fonts/zombiecontrol.ttf");
 
+	
 	AddGameObject(new TileMap("TileMap"));
+	
+	uiHud = (UiHud*)AddGameObject(new UiHud("UiHud"));
 	
 	Scene::Init();
 	
