@@ -3,6 +3,7 @@
 #include "HitBox.h"
 
 class SceneGame;
+class Bullet;
 class Player :
     public GameObject
 {
@@ -20,6 +21,9 @@ protected:
 	int maxHp = 1000;
 	int hp = 0;
 
+	std::list<Bullet*>bulletList;
+	std::list<Bullet*>bulletPool;
+
 public:
 	Player(const std::string& name = "");
 	virtual ~Player() = default;
@@ -36,6 +40,7 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
+	void Shoot();
 	sf::FloatRect GetLocalBounds() const override
 	{
 		return body.getLocalBounds();
