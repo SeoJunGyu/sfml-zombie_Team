@@ -1,5 +1,8 @@
 #pragma once
 #include "GameObject.h"
+
+class Player;
+
 class Zombie :
     public GameObject
 {
@@ -22,7 +25,7 @@ protected:
 	int hp = 0;
 	int damage = 0;
 
-	sf::Vector2f playerPos;
+	Player* player = nullptr;
 
 	Type type = Type::Bloater;
 
