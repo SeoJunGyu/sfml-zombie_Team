@@ -53,7 +53,7 @@ void Player::Reset()
 {
 	if (SCENE_MGR.GetCurrentSceneId() == SceneIds::Game)
 	{
-		sceneGame = (SceneGame*)SCENE_MGR.GetCurrentScene();
+		sceneGame = (SceneGame*)SCENE_MGR.GetCurrentScene(); //다운 캐스팅 
 	}
 	else
 	{
@@ -68,19 +68,20 @@ void Player::Reset()
 	look = { 1.f , 0.f }; //스트라이트의 기본이 오른쪽으로 바라보고 있는 상태
 }
 
+
 void Player::Update(float dt)
 {
 	direction.x = InputMgr::GetAxis(Axis::Horizontal);
 	direction.y = InputMgr::GetAxis(Axis::Vertical);
-	if (Utils::Magnitude(direction) > 1.f) //거리 측정 속도 계산 (백터의 길이)
+	if (Utils::Magnitude(direction) > 1.f)
 	{
-		Utils::Normalize(direction); //방향 
+		Utils::Normalize(direction);
 	}
-	SetPosition(position + direction * speed * dt);
+	SetPosition(position + direction * dt);
 	sf::Vector2i mousePos = InputMgr::GetMousePosition();
-
+	sf::Vector2f mouseWorldPos = sceneGame->ScreenToWorld(mousePos);
+	look = Utils::GetNormal(mouseWorldPos - GetPosition());
 	SetRotation(Utils::Angle(look));
-
 }
 
 void Player::Draw(sf::RenderWindow& window)
