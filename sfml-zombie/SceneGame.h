@@ -9,9 +9,10 @@ class SceneGame :
 {
 protected:
 	Zombie* zombie = nullptr;
+	Player* player = nullptr;
 
-	std::list<Zombie*> zombieList; //Ȱ�� ����
-	std::list<Zombie*> zombiePool; //��Ȱ�� ����
+	std::list<Zombie*> zombieList;
+	std::list<Zombie*> zombiePool;
 
 public:
 	SceneGame();
@@ -21,6 +22,5 @@ public:
 	void Enter() override;
 
 	void Update(float dt) override;
-	Player* player = nullptr; //�⺻���� �Ҵ� nullptr�� �����Ⱚ ���� 
 };
 

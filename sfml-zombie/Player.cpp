@@ -81,9 +81,12 @@ void Player::Update(float dt)
 
 	SetRotation(Utils::Angle(look));
 
+	hitBox.UpdateTransform(body, GetLocalBounds());
+
 }
 
 void Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
+	hitBox.Draw(window);
 }

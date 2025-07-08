@@ -1,5 +1,7 @@
 #pragma once
 #include "GameObject.h"
+#include "HitBox.h"
+
 class SceneGame;
 class Player :
     public GameObject
@@ -12,6 +14,8 @@ protected:
 	sf::Vector2f look;
 
 	SceneGame* sceneGame = nullptr;
+	HitBox hitBox;
+
 	float speed = 500.f;
 
 public:
@@ -29,5 +33,15 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	sf::FloatRect GetLocalBounds() const override
+	{
+		return body.getLocalBounds();
+	}
+
+	sf::FloatRect GetGlobalBounds() const override
+	{
+		return body.getGlobalBounds();
+	}
 };
 
