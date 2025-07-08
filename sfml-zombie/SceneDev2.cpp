@@ -15,7 +15,7 @@ void SceneDev2::Init()
 	go->SetCharacterSize(30);
 	go->SetFillColor(sf::Color::White);
 	AddGameObject(go);
-
+	//
 	Scene::Init();
 }
 
