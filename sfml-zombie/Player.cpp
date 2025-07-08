@@ -41,7 +41,7 @@ void Player::SetOrigin(Origins preset)
 
 void Player::Init()
 {
-	sortingLayer = SortingLayers::Foreground;
+	sortingLayer = SortingLayers::ForeGround;
 	sortingOrder = 0;
 }
 
