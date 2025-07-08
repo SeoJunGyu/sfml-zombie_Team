@@ -41,7 +41,7 @@ void Zombie::SetOrigin(Origins preset)
 
 void Zombie::Init()
 {
-	sortingLayer = SortingLayers::Forground;
+	sortingLayer = SortingLayers::ForeGround;
 	sortingOrder = 0;
 
 	SetType(type);

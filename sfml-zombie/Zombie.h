@@ -1,5 +1,8 @@
 #pragma once
 #include "GameObject.h"
+
+class Player;
+
 class Zombie :
     public GameObject
 {
