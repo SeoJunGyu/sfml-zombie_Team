@@ -76,7 +76,7 @@ void Player::Reset()
 	look = { 1.f , 0.f };
 
 	hp = maxHp;
-	look = { 1.f , 0.f }; //��Ʈ����Ʈ�� �⺻�� ���������� �ٶ󺸰� �ִ� ����
+	look = { 1.f , 0.f };
 }
 
 
@@ -111,6 +111,8 @@ void Player::Update(float dt)
 	{
 		Shoot();
 	}
+
+	hitBox.UpdateTransform(body, GetLocalBounds());
 }
 
 void Player::Draw(sf::RenderWindow& window)
