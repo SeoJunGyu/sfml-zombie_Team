@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "HitBox.h"
 
 class Player;
 
@@ -25,7 +26,8 @@ protected:
 	int hp = 0;
 	int damage = 0;
 
-	sf::Vector2f playerPos;
+	Player* player = nullptr;
+	HitBox hitBox;
 
 	Type type = Type::Bloater;
 
@@ -46,5 +48,15 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	void SetType(Type type);
+
+	sf::FloatRect GetLocalBounds() const override
+	{
+		return body.getLocalBounds();
+	}
+
+	sf::FloatRect GetGlobalBounds() const override
+	{
+		return body.getGlobalBounds();
+	}
 };
 

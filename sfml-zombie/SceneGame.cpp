@@ -9,7 +9,7 @@ SceneGame::SceneGame()
 }
 
 void SceneGame::Init()
-{//branch Test
+{
 	texIds.push_back("graphics/Bloater.png");
 	texIds.push_back("graphics/Chaser.png");
 	texIds.push_back("graphics/Crawler.png");
@@ -48,20 +48,18 @@ void SceneGame::Update(float dt)
 			Zombie* zombie = nullptr;
 			if (zombiePool.empty())
 			{
-				//��Ȱ�� ���� ���ٸ� ���� �߰�
 				zombie = (Zombie*)AddGameObject(new Zombie());
 				zombie->Init();
 			}
 			else
 			{
-				//��Ȱ�� ���� �ִٸ�
-				zombie = zombiePool.front(); //�Ҵ�
-				zombiePool.pop_front(); //��Ȱ�� ��Ͽ��� ����
-				zombie->SetActive(true); //Ȱ��
+				zombie = zombiePool.front();
+				zombiePool.pop_front();
+				zombie->SetActive(true);
 			}
 
+			zombie->SetType((Zombie::Type)Utils::RandomRange(0, Zombie::TotalType));
 			zombie->Reset();
-			zombie->SetType((Zombie::Type)0);
 			zombie->SetPosition(Utils::RandomInUnitCircle() * 500.f);
 			zombieList.push_back(zombie);
 		}
