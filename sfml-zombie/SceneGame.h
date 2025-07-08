@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 class Zombie;
+class Player;
 
 class SceneGame :
     public Scene
@@ -20,5 +21,6 @@ public:
 	void Enter() override;
 
 	void Update(float dt) override;
+	Player* player = nullptr; //�⺻���� �Ҵ� nullptr�� �����Ⱚ ���� 
 };
 
