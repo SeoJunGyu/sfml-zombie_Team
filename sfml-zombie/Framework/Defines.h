@@ -2,7 +2,10 @@
 
 enum class SortingLayers
 {
-	Default,
+	Background,//world view 
+	Foreground, //움직이는것 world view 
+	Default,// worldview
+	UI,
 };
 
 enum class Origins
@@ -16,6 +19,7 @@ enum class Origins
 enum class SceneIds
 {
 	None = -1,
+	Game,
 	Dev1,
 	Dev2,
 	Count,
