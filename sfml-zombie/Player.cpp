@@ -53,7 +53,7 @@ void Player::Reset()
 {
 	if (SCENE_MGR.GetCurrentSceneId() == SceneIds::Game)
 	{
-		sceneGame = (SceneGame*)SCENE_MGR.GetCurrentScene();
+		sceneGame = (SceneGame*)SCENE_MGR.GetCurrentScene(); //ï¿½Ù¿ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ 
 	}
 	else
 	{
@@ -65,24 +65,23 @@ void Player::Reset()
 	SetRotation(0.f);
 
 	direction = { 0.f , 0.f };
-	look = { 1.f , 0.f }; //½ºÆ®¶óÀÌÆ®ÀÇ ±âº»ÀÌ ¿À¸¥ÂÊÀ¸·Î ¹Ù¶óº¸°í ÀÖ´Â »óÅÂ
+	look = { 1.f , 0.f }; //ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸°ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
 }
+
 
 void Player::Update(float dt)
 {
 	direction.x = InputMgr::GetAxis(Axis::Horizontal);
 	direction.y = InputMgr::GetAxis(Axis::Vertical);
-	if (Utils::Magnitude(direction) > 1.f) //°Å¸® ÃøÁ¤ ¼Óµµ °è»ê (¹éÅÍÀÇ ±æÀÌ)
+	if (Utils::Magnitude(direction) > 1.f)
 	{
-		Utils::Normalize(direction); //¹æÇâ 
+		Utils::Normalize(direction);
 	}
-	SetPosition(position + direction * speed * dt);
+	SetPosition(position + direction * dt);
 	sf::Vector2i mousePos = InputMgr::GetMousePosition();
-
+	sf::Vector2f mouseWorldPos = sceneGame->ScreenToWorld(mousePos);
+	look = Utils::GetNormal(mouseWorldPos - GetPosition());
 	SetRotation(Utils::Angle(look));
-
-	hitBox.UpdateTransform(body, GetLocalBounds());
-
 }
 
 void Player::Draw(sf::RenderWindow& window)
