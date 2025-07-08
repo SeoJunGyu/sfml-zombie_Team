@@ -25,7 +25,7 @@ protected:
 	int hp = 0;
 	int damage = 0;
 
-	Player* player = nullptr;
+	sf::Vector2f playerPos;
 
 	Type type = Type::Bloater;
 
