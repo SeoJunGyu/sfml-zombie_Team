@@ -9,8 +9,8 @@ class SceneGame :
 protected:
 	Zombie* zombie = nullptr;
 
-	std::list<Zombie*> zombieList; //È°¼º Á»ºñ
-	std::list<Zombie*> zombiePool; //ºñÈ°¼º Á»ºñ
+	std::list<Zombie*> zombieList; //È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	std::list<Zombie*> zombiePool; //ï¿½ï¿½È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 public:
 	SceneGame();

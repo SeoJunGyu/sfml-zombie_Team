@@ -25,7 +25,15 @@ void SceneGame::Init()
 
 void SceneGame::Enter()
 {
+	sf::Vector2f windowSize = FRAMEWORK.GetWindowSizeF();
+	worldView.setSize(windowSize);
+	worldView.setCenter({ 0.f, 0.f });
+	uiView.setSize(windowSize);
+	uiView.setCenter(windowSize * .5f);
 	Scene::Enter();
+}
+
+	
 }
 
 void SceneGame::Update(float dt)
@@ -39,16 +47,16 @@ void SceneGame::Update(float dt)
 			Zombie* zombie = nullptr;
 			if (zombiePool.empty())
 			{
-				//ºñÈ°¼º Á»ºñ°¡ ¾ø´Ù¸é »õ·Î Ãß°¡
+				//ï¿½ï¿½È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 				zombie = (Zombie*)AddGameObject(new Zombie());
 				zombie->Init();
 			}
 			else
 			{
-				//ºñÈ°¼º Á»ºñ°¡ ÀÖ´Ù¸é
-				zombie = zombiePool.front(); //ÇÒ´ç
-				zombiePool.pop_front(); //ºñÈ°¼º ¸ñ·Ï¿¡¼­ Á¦°Å
-				zombie->SetActive(true); //È°¼º
+				//ï¿½ï¿½È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½
+				zombie = zombiePool.front(); //ï¿½Ò´ï¿½
+				zombiePool.pop_front(); //ï¿½ï¿½È°ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				zombie->SetActive(true); //È°ï¿½ï¿½
 			}
 
 			zombie->Reset();

@@ -2,10 +2,10 @@
 
 enum class SortingLayers
 {
-	Background,
-	Forground,
+	BackGround,
+	ForeGround,
 	Default,
-	UI,
+	UiView,
 };
 
 enum class Origins
