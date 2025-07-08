@@ -3,7 +3,7 @@
 class SceneGame :  public Scene
 {
 protected:
-	
+	sf::Sprite cursor;
 public:
 	SceneGame();
 	~SceneGame() override;
