@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "SceneGame.h"
+#include "Bullet.h"
 
 Player::Player(const std::string& name)
 	: GameObject(name)
@@ -59,6 +60,13 @@ void Player::Reset()
 	{
 		sceneGame = nullptr;
 	}
+	for (Bullet* bullet : bulletList)
+	{
+		bullet->SetActive(false);
+		bulletPool.push_back(bullet);
+	}
+	bulletList.clear();
+
 	body.setTexture(TEXTURE_MGR.Get(texId), true);
 	SetOrigin(Origins::MC);
 	SetPosition({ 0.f, 0.f });
@@ -71,20 +79,61 @@ void Player::Reset()
 
 void Player::Update(float dt)
 {
+	auto it = bulletList.begin();
+	while ( it != bulletList.end())
+	{
+		if (!(*it)->GetActive())
+		{
+			bulletPool.push_back(*it); //요소이기때문에 포인터연산자 필요
+			bulletList.erase(it);
+		}
+		else 
+		{
+			++it;
+		}
+	}
 	direction.x = InputMgr::GetAxis(Axis::Horizontal);
 	direction.y = InputMgr::GetAxis(Axis::Vertical);
 	if (Utils::Magnitude(direction) > 1.f)
 	{
 		Utils::Normalize(direction);
 	}
-	SetPosition(position + direction * dt);
+	SetPosition(position + direction * speed * dt);
 	sf::Vector2i mousePos = InputMgr::GetMousePosition();
 	sf::Vector2f mouseWorldPos = sceneGame->ScreenToWorld(mousePos);
 	look = Utils::GetNormal(mouseWorldPos - GetPosition());
 	SetRotation(Utils::Angle(look));
+
+	if (InputMgr::GetMouseButton(sf::Mouse::Left))
+	{
+		Shoot();
+	}
 }
 
 void Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
+}
+
+void Player::Shoot()
+{
+	Bullet* bullet = nullptr;
+	if (bulletPool.empty())
+	{
+		bullet = new Bullet;
+		bullet->Init();
+	}
+	else
+	{
+		bullet = bulletPool.front();
+		bulletPool.pop_front();
+		bullet->SetActive(true);
+	}
+	bullet->Reset();
+	bullet->Fire(position + look * 10.f, look, 1000.f, 10);
+
+	bulletList.push_back(bullet);
+	sceneGame->AddGameObject(bullet);
+
+
 }

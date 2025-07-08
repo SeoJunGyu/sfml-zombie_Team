@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 class SceneGame;
+class Bullet;
 class Player :
     public GameObject
 {
@@ -13,6 +14,9 @@ protected:
 
 	SceneGame* sceneGame = nullptr;
 	float speed = 500.f;
+
+	std::list<Bullet*>bulletList;
+	std::list<Bullet*>bulletPool;
 
 public:
 	Player(const std::string& name = "");
@@ -29,5 +33,7 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	void Shoot();
 };
 

@@ -2,6 +2,7 @@
 #include "SceneGame.h"
 #include "Player.h"
 #include "Zombie.h"
+#include "Bullet.h"
 
 SceneGame::SceneGame()
 	: Scene(SceneIds::Game)
@@ -14,6 +15,7 @@ void SceneGame::Init()
 	texIds.push_back("graphics/Chaser.png");
 	texIds.push_back("graphics/Crawler.png");
 	texIds.push_back("graphics/player.png");
+	texIds.push_back("graphics/bullet.png");
 
 	player = (Player*)AddGameObject(new Player("Player"));
 
