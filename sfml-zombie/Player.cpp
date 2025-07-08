@@ -65,6 +65,9 @@ void Player::Reset()
 	SetRotation(0.f);
 
 	direction = { 0.f , 0.f };
+	look = { 1.f , 0.f };
+
+	hp = maxHp;
 	look = { 1.f , 0.f }; //��Ʈ����Ʈ�� �⺻�� ���������� �ٶ󺸰� �ִ� ����
 }
 
@@ -88,4 +91,18 @@ void Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
 	hitBox.Draw(window);
+}
+
+void Player::OnDamage(int damage)
+{
+	if (!IsAlive())
+	{
+		return;
+	}
+
+	hp = Utils::Clamp(hp - damage, 0, maxHp);
+	if (hp == 0)
+	{
+		SCENE_MGR.ChangeScene(SceneIds::Game);
+	}
 }
