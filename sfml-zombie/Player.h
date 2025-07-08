@@ -17,6 +17,8 @@ protected:
 	HitBox hitBox;
 
 	float speed = 500.f;
+	int maxHp = 1000;
+	int hp = 0;
 
 public:
 	Player(const std::string& name = "");
@@ -43,5 +45,10 @@ public:
 	{
 		return body.getGlobalBounds();
 	}
+
+	const HitBox& GetHitBox() { return hitBox; }
+	void OnDamage(int damage);
+
+	bool IsAlive() { return hp > 0; }
 };
 
