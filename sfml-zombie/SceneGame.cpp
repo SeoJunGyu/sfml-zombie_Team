@@ -25,6 +25,8 @@ void SceneGame::Init()
 
 void SceneGame::Enter()
 {
+	FRAMEWORK.GetWindow().setMouseCursorVisible(false);
+
 	sf::Vector2f windowSize = FRAMEWORK.GetWindowSizeF();
 
 	worldView.setSize(windowSize);
@@ -34,6 +36,7 @@ void SceneGame::Enter()
 
 	Scene::Enter();
 	cursor.setTexture(TEXTURE_MGR.Get("graphics/crosshair.png"));
+	Utils::SetOrigin(cursor, Origins::MC);
 }
 
 void SceneGame::Exit()
@@ -42,6 +45,8 @@ void SceneGame::Exit()
 
 void SceneGame::Update(float dt)
 {
+	cursor.setPosition(ScreenToUi(InputMgr::GetMousePosition()));
+	Scene::Update(dt);
 }
 
 void SceneGame::Draw(sf::RenderWindow& window)

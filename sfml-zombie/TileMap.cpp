@@ -112,7 +112,7 @@ void TileMap::Init()
 	//layer위치 지정
 	sortingLayer = SortingLayers::Background;
 	sortingOrder = 0;
-	Set({ 50, 50 }, { 50.f, 50.f });
+	
 	
 
 }
@@ -123,6 +123,8 @@ void TileMap::Release()
 
 void TileMap::Reset()
 {
+	Set({ Variables::wave * 10, Variables::wave * 10 }, { 50.f, 50.f });
+	
 	texture = &TEXTURE_MGR.Get(spriteSheetId);
 	
 	
