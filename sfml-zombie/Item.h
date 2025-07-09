@@ -3,6 +3,7 @@
 #include "HitBox.h"
 
 class Player;
+class UiHud;
 
 class Item :
     public GameObject
@@ -22,6 +23,7 @@ protected:
 	int value = 0; //장탄수 혹은 회복값
 
 	Player* player = nullptr;
+	UiHud* uiHud = nullptr;
 	HitBox hitBox;
 
 	Type type = Type::Ammo;
@@ -43,6 +45,9 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	void SetType(Type type);
+	Type GetType() const { return type; }
+	void SetValue(int value) { this->value = value; }
+	int GetValue() const { return value; }
 
 	sf::FloatRect GetLocalBounds() const override
 	{
@@ -55,6 +60,8 @@ public:
 	}
 
 	const HitBox& GetHitBox() { return hitBox; }
+
 	void OnInteract(int value);
+	
 };
 

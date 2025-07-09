@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Item.h"
 #include "Player.h"
+#include "UiHud.h"
 
 Item::Item(const std::string& name)
 	: GameObject(name)
@@ -55,19 +56,23 @@ void Item::Release()
 void Item::Reset()
 {
 	player = (Player*)SCENE_MGR.GetCurrentScene()->FindGameObject("Player");
+	uiHud = (UiHud*)SCENE_MGR.GetCurrentScene()->FindGameObject("UiHud");
 
 	body.setTexture(TEXTURE_MGR.Get(texId), true);
 	SetOrigin(Origins::MC);
 	SetPosition({ 0.f, 0.f });
 	SetRotation(0.f);
 	SetScale({ 1.f, 1.f });
-
-	value = 0;
 }
 
 void Item::Update(float dt)
 {
 	hitBox.UpdateTransform(body, GetLocalBounds());
+
+	if (Utils::CheckCollision(hitBox.rect, player->GetHitBox().rect))
+	{
+		OnInteract(value);
+	}
 }
 
 void Item::Draw(sf::RenderWindow& window)
@@ -86,7 +91,7 @@ void Item::SetType(Type type)
 		break;
 	case Item::Health:
 		texId = "graphics/health_pickup.png";
-		value = 50;
+		value = 500;
 		break;
 	}
 }
@@ -97,10 +102,12 @@ void Item::OnInteract(int value)
 	{
 	case Type::Ammo:
 		player->SetAmmo(value);
+		uiHud->SetTextBulletCount(player->GetAmmo(), player->GetMaxAmmo());
 		break;
-		
+
 	case Type::Health:
-		player->SetHp(player->GetHp() + value);
+		player->SetHp(value);
 		break;
 	}
+	SetActive(false);
 }
