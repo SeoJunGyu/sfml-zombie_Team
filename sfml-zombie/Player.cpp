@@ -191,7 +191,7 @@ void Player::OnDamage(int damage)
 	if (hp == 0)
 	{
 		Variable::wave = 1;
-		SCENE_MGR.ChangeScene(SceneIds::Game);
+		SCENE_MGR.ChangeScene(SceneIds::Title);
 	}
 }
 
