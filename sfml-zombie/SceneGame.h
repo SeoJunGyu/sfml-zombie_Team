@@ -1,21 +1,33 @@
 #pragma once
 #include "Scene.h"
 
+class Zombie;
 class Player;
 
 class SceneGame :
     public Scene
 {
 protected:
-	Player* player = nullptr; //기본값을 할당 nullptr로 쓰레기값 방지 
+	Zombie* zombie = nullptr;
+	Player* player = nullptr;
+
+	std::list<Zombie*> zombieList;
+	std::list<Zombie*> zombiePool;
 
 public:
-	SceneGame(const std::string& name = "");
-	virtual ~SceneGame() = default;
+	SceneGame();
+	~SceneGame() = default;
 
 	void Init() override;
-	void Release() override;
+	void Enter() override;
+	void Exit() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+	const std::list<Zombie*>& GetZombies() const
+	{
+		return zombieList;
+	}
+
+	void SpawnZombie(int count);
 };
 
