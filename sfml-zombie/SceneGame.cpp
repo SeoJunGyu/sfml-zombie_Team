@@ -26,6 +26,13 @@ void SceneGame::Init()
 	texIds.push_back("graphics/bullet.png");
 	texIds.push_back("graphics/blood.png");
 
+	soundPlayer.Load("bgm", "sound/index.m3u8");
+	soundPlayer.Load("death", "sound/death.wav");
+	soundPlayer.Load("shoot", "sound/shoot.wav");
+	soundPlayer.Load("hit", "sound/hit.wav");
+	soundPlayer.Load("pickup", "sound/pickup.wav");
+	soundPlayer.Load("reload", "sound/reload.wav");
+
 	fontIds.push_back("fonts/zombiecontrol.ttf");
 
 	AddGameObject(new TileMap("TileMap"));

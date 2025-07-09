@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "HitBox.h"
+#include "SoundPlayer.h"
 
 class Player;
 
@@ -35,6 +36,8 @@ protected:
 	HitBox hitBox;
 
 	Type type = Type::Bloater;
+
+	SoundPlayer soundPlayer;
 
 public:
 	Zombie(const std::string& name = "");

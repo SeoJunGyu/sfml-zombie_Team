@@ -44,6 +44,8 @@ void Player::SetOrigin(Origins preset)
 
 void Player::Init()
 {
+	soundPlayer.Load("shoot", "sound/shoot.wav");
+	soundPlayer.Load("reload", "sound/reload.wav");
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 0;
 }
@@ -158,6 +160,7 @@ void Player::Update(float dt)
 	{
 		if (ammo > 0)
 		{
+			soundPlayer.Play("shoot");
 			Shoot();
 			attackTimer = 0.f;
 			ammo--;
@@ -201,12 +204,14 @@ void Player::Reload()
 	{
 		if (maxReload - ammo > maxAmmo)
 		{
+			soundPlayer.Play("reload");
 			ammo += maxAmmo;
 			maxAmmo = 0;
 			uihud->SetTextBulletCount(ammo, maxAmmo);
 		}
 		else
 		{
+			soundPlayer.Play("reload");
 			maxAmmo -= maxReload - ammo;
 			ammo += maxReload - ammo;
 			uihud->SetTextBulletCount(ammo, maxAmmo);

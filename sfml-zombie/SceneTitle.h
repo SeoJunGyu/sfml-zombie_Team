@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include "SoundPlayer.h"
 class SceneTitle :
     public Scene
 {
@@ -9,6 +10,8 @@ protected:
 
 	sf::Text titleText;
 	sf::Font font; 
+
+	SoundPlayer soundPlayer;
 
 public:
 	SceneTitle();

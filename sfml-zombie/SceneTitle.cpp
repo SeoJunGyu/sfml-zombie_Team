@@ -8,6 +8,7 @@ SceneTitle::SceneTitle()
 
 void SceneTitle::Init()
 {
+	soundPlayer.Load("bgm", "sound/bgm.wav");
 	resourceLoad();
 	TEXTURE_MGR.Load(texIds);
 	FONT_MGR.Load(fontIds);
@@ -17,19 +18,21 @@ void SceneTitle::Init()
 	font = FONT_MGR.Get("fonts/zombiecontrol.ttf");
 	titleText.setFont(font);
 	titleText.setString("Game Start");
-	titleText.setCharacterSize(200);
-	titleText.setFillColor(sf::Color::White);
+	titleText.setCharacterSize(80);
+	titleText.setFillColor(sf::Color(255, 224, 189));
 
 	sf::FloatRect bounds = titleText.getLocalBounds();
 	titleText.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
 
+	float yOffset = 300.f;
 	sf::Vector2f windowSize = FRAMEWORK.GetWindowSizeF();
-	titleText.setPosition(windowSize.x / 2.f, windowSize.y / 2.f);
+	titleText.setPosition(windowSize.x / 2.f, windowSize.y / 2.f  + yOffset);
 	Scene::Init(); //씬 타일틀 init 원래 씬이 가지고 있던 부모를 가져다 쓰는 (원래 못쓰지만)
 }
 
 void SceneTitle::Enter()
 {
+	soundPlayer.Play("bgm");
 	SetUpViews();
 	Scene::Enter();
 }
@@ -48,12 +51,12 @@ void SceneTitle::Update(float dt)
 
 	if (titleText.getGlobalBounds().contains(worldPos))
 	{
-		titleText.setFillColor(sf::Color::Yellow);
+		titleText.setFillColor(sf::Color::Red);
 		titleText.setScale(1.1f, 1.1f);
 	}
 	else
 	{
-		titleText.setFillColor(sf::Color::White);
+		titleText.setFillColor(sf::Color(255, 224, 189));
 		titleText.setScale(1.0f, 1.0f);
 	}
 

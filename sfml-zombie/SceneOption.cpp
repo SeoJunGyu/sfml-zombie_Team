@@ -38,18 +38,19 @@ void SceneOption::Init()
 		sf::Text text;
 		text.setFont(font);
 		text.setString(optionStrings[i]);
-		text.setCharacterSize(70);
-		text.setFillColor(sf::Color(149, 204, 164));
+		text.setCharacterSize(55);
+		text.setFillColor(sf::Color(255, 224, 189));
+
+		float yOffset = 50.f;
 
 		sf::FloatRect bounds = text.getLocalBounds();
-		text.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
+		text.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f - yOffset);
 
 		float x = windowSize.x / 2.f;
 		float y = startY + i * gapY;
 		text.setPosition(x, y);
 		optionTexts.push_back(text);
 	}
-
 
 	Scene::Init();
 }
@@ -77,7 +78,7 @@ void SceneOption::Update(float dt)
 		auto& text = optionTexts[i];
 		if (text.getGlobalBounds().contains(worldPos))
 		{
-			text.setFillColor(sf::Color::Yellow); // hover
+			text.setFillColor(sf::Color::Red); // hover
 			text.setScale(1.1f, 1.1f);
 			if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
 			{
@@ -96,7 +97,7 @@ void SceneOption::Update(float dt)
 		}
 		else
 		{
-			text.setFillColor(sf::Color(149, 204, 164));
+			text.setFillColor(sf::Color(255, 224, 189));
 			text.setScale(1.0f, 1.0f);
 		}
 	}
@@ -115,8 +116,6 @@ void SceneOption::SetUpViews()
 
 	uiView.setSize(windowSize);
 	uiView.setCenter(windowSize * 0.5f);
-	
-
 }
 
 void SceneOption::resourceLoad()
