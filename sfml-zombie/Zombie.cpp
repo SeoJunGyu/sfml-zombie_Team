@@ -42,6 +42,7 @@ void Zombie::SetOrigin(Origins preset)
 
 void Zombie::Init()
 {
+	soundPlayer.Load("hit", "sound/hit.wav");
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 0;
 
@@ -99,6 +100,7 @@ void Zombie::Update(float dt)
 		{
 			if (Utils::CheckCollision(hitBox.rect, player->GetHitBox().rect))
 			{
+				soundPlayer.Play("hit");
 				player->OnDamage(damage);
 				attackTimer = 0.f;
 			}

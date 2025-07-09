@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "HitBox.h"
+#include "SoundPlayer.h"
 
 class SceneGame;
 class Bullet;
@@ -19,6 +20,8 @@ protected:
 
 	SceneGame* sceneGame = nullptr;
 	HitBox hitBox;
+
+	SoundPlayer soundPlayer;
 
 	float speed = 500.f;
 	int maxHp = 100;

@@ -24,6 +24,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="SceneOption.cpp" />
+    <ClCompile Include="SoundPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,5 +93,6 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="SceneOption.h" />
+    <ClInclude Include="SoundPlayer.h" />
   </ItemGroup>
 </Project>

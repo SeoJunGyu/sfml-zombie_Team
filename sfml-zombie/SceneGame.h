@@ -1,11 +1,13 @@
 #pragma once
 #include "Scene.h"
+#include "SoundPlayer.h"
 
 class Zombie;
 class Item;
 class Player;
 class UiHud;
 
+class SoundPlayer;
 class SceneGame :
     public Scene
 {
@@ -20,7 +22,7 @@ protected:
 	std::list<Item*> itemList;
 	std::list<Item*> itemPool;
 
-
+	SoundPlayer soundPlayer;
 	sf::Sprite cursor;
 	UiHud* uiHud;
 	int zombieCount = 0;

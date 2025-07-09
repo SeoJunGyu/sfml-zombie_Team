@@ -43,6 +43,7 @@ void Item::SetOrigin(Origins preset)
 
 void Item::Init()
 {
+	soundPlayer.Load("pickup", "sound/pickup.wav");
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = -1;
 
@@ -72,6 +73,7 @@ void Item::Update(float dt)
 	if (Utils::CheckCollision(hitBox.rect, player->GetHitBox().rect))
 	{
 		OnInteract(value);
+		soundPlayer.Play("pickup");
 	}
 }
 

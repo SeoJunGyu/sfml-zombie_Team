@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "HitBox.h"
+#include "SoundPlayer.h"
 
 class Player;
 class UiHud;
@@ -29,6 +30,8 @@ protected:
 	HitBox hitBox;
 
 	Type type = Type::Ammo;
+
+	SoundPlayer soundPlayer;
 
 public:
 	Item(const std::string& name = "");
