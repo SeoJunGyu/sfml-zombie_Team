@@ -49,15 +49,23 @@ void SceneTitle::Update(float dt)
 	sf::Vector2i mousePos = sf::Mouse::getPosition(FRAMEWORK.GetWindow());
 	sf::Vector2f worldPos = FRAMEWORK.GetWindow().mapPixelToCoords(mousePos, uiView);
 
+	blinkTimer += dt;
 	if (titleText.getGlobalBounds().contains(worldPos))
 	{
+		Visible = true;
 		titleText.setFillColor(sf::Color::Red);
 		titleText.setScale(1.1f, 1.1f);
 	}
 	else
 	{
-		titleText.setFillColor(sf::Color(255, 224, 189));
-		titleText.setScale(1.0f, 1.0f);
+		if (blinkTimer >= blinkInterval)
+		{
+			blinkTimer = 0.f;
+			titleText.setFillColor(sf::Color(255, 224, 189));
+			titleText.setScale(1.0f, 1.0f);
+			Visible = !Visible;
+		}
+		
 	}
 
 	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
@@ -93,6 +101,9 @@ void SceneTitle::Draw(sf::RenderWindow& window)
 {
 	window.setView(uiView);
 	window.draw(background);
-	window.draw(titleText);
+	if (Visible)
+	{
+		window.draw(titleText);
+	}
 }
 
