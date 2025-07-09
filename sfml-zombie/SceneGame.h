@@ -21,6 +21,8 @@ protected:
 
 	sf::Sprite cursor;
 	UiHud* uiHud;
+	int zombieCount = 0;
+	int score = 0;
 public:
 	SceneGame();
 	~SceneGame() = default;

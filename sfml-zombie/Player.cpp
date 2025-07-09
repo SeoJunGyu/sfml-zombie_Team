@@ -160,7 +160,6 @@ void Player::OnDamage(int damage)
 	hp = Utils::Clamp(hp - damage, 0, maxHp);
 	if (hp == 0)
 	{
-		Variable::wave++;
 		SCENE_MGR.ChangeScene(SceneIds::Game);
 	}
 }
