@@ -64,5 +64,7 @@ public:
 
 	const HitBox& GetHitBox() { return hitBox; }
 	void OnDamage(int damage);
+
+	bool IsAlive() { return hp > 0; }
 };
 

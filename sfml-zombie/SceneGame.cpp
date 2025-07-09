@@ -24,6 +24,7 @@ void SceneGame::Init()
 	texIds.push_back("graphics/crawler.png");
 	texIds.push_back("graphics/player.png");
 	texIds.push_back("graphics/bullet.png");
+	texIds.push_back("graphics/blood.png");
 
 	fontIds.push_back("fonts/zombiecontrol.ttf");
 
@@ -171,9 +172,9 @@ void SceneGame::SpawnItem(int count)
 			item->SetActive(true);
 		}
 
-		item->SetType((Item::Type)Utils::RandomRange(0, Item::Type::Count));
+		item->SetType((Item::Type)Utils::RandomRange(0, Item::TypeCount));
 		item->Reset();
-		item->SetPosition(Utils::RandomInUnitCircle() * 500.f);
+		item->SetPosition(Utils::RandomInUnitCircle() * (200.f * Variable::wave));
 		itemList.push_back(item);
 	}
 }

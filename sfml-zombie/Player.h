@@ -21,7 +21,7 @@ protected:
 	HitBox hitBox;
 
 	float speed = 500.f;
-	int maxHp = 1000;
+	int maxHp = 100;
 	int hp = 0;
 
 	int maxAmmo = 3;
@@ -67,6 +67,8 @@ public:
 	const HitBox& GetHitBox() { return hitBox; }
 	void SetHp(int hp) { this->hp += hp; }
 	int GetHp() const { return hp; }
+	void SetMaxHp(int maxHp) { this->maxHp = maxHp; }
+	int GetMaxHp() const { return maxHp; }
 	void SetAmmo(int ammo) { maxAmmo += ammo; }
 	int GetAmmo() const { return ammo; }
 	int GetMaxAmmo() const { return maxAmmo; }

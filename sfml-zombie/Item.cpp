@@ -46,7 +46,7 @@ void Item::Init()
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = -1;
 
-	SetType(type);
+	//SetType(type);
 }
 
 void Item::Release()
@@ -83,6 +83,7 @@ void Item::Draw(sf::RenderWindow& window)
 
 void Item::SetType(Type type)
 {
+	this->type = type;
 	switch (type)
 	{
 	case Item::Ammo:
@@ -91,7 +92,7 @@ void Item::SetType(Type type)
 		break;
 	case Item::Health:
 		texId = "graphics/health_pickup.png";
-		value = 500;
+		value = 50;
 		break;
 	}
 }
@@ -106,7 +107,18 @@ void Item::OnInteract(int value)
 		break;
 
 	case Type::Health:
-		player->SetHp(value);
+		if (player->GetHp() + value > player->GetMaxHp())
+		{
+			int tmp = player->GetMaxHp() - player->GetHp();
+			player->SetHp(tmp);
+			uiHud->SetHpBar((float)player->GetHp() / player->GetMaxHp());
+		}
+		else
+		{
+			player->SetHp(value);
+			uiHud->SetHpBar((float)player->GetHp() / player->GetMaxHp());
+		}
+		
 		break;
 	}
 	SetActive(false);
