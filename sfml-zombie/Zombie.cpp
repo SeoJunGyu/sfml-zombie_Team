@@ -56,21 +56,19 @@ void Zombie::Reset()
 {
 	player = (Player*)SCENE_MGR.GetCurrentScene()->FindGameObject("Player");
 
-	if (!IsAlive())
+	isAlive = true;
+
+	switch (type)
 	{
-		switch (type)
-		{
-		case Zombie::Bloater:
-			texId = "graphics/bloater.png";
-			break;
-		case Zombie::Chaser:
-			texId = "graphics/chaser.png";
-			break;
-		case Zombie::Crawler:
-			texId = "graphics/crawler.png";
-			break;
-		}
-		SetActive(true);
+	case Zombie::Bloater:
+		texId = "graphics/bloater.png";
+		break;
+	case Zombie::Chaser:
+		texId = "graphics/chaser.png";
+		break;
+	case Zombie::Crawler:
+		texId = "graphics/crawler.png";
+		break;
 	}
 
 	body.setTexture(TEXTURE_MGR.Get(texId), true);
@@ -154,6 +152,7 @@ void Zombie::OnDamage(int damage)
 	if (hp == 0)
 	{
 		hp = 0;
+		isAlive = false;
 		texId = "graphics/blood.png";
 		body.setTexture(TEXTURE_MGR.Get(texId));
 	}

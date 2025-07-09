@@ -59,9 +59,10 @@ void SceneGame::Enter()
 	auto it = zombieList.begin();
 	while (it != zombieList.end())
 	{
-		if (!(*it)->IsAlive())
+		if (!(*it)->GetAlive())
 		{
 			zombiePool.push_back(*it);
+			(*it)->SetActive(false);
 			it = zombieList.erase(it);
 		}
 		else
@@ -179,6 +180,7 @@ void SceneGame::SpawnZombie(int count)
 			zombie->SetActive(true);
 		}
 
+		zombie->SetAlive(true);
 		zombie->SetType((Zombie::Type)Utils::RandomRange(0, Zombie::TotalType));
 		zombie->Reset();
 		zombie->SetPosition(Utils::RandomInUnitCircle() * (200.f * Variable::wave));

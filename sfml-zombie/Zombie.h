@@ -29,6 +29,8 @@ protected:
 	float attackInterval = 0.f;
 	float attackTimer = 0.f;
 
+	bool isAlive = true;
+
 	Player* player = nullptr;
 	HitBox hitBox;
 
@@ -68,5 +70,7 @@ public:
 	void OnDamage(int damage);
 
 	bool IsAlive() { return hp > 0; }
+	bool GetAlive() const { return isAlive; }
+	void SetAlive(bool live) { isAlive = live; }
 };
 
