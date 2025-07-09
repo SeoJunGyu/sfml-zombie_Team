@@ -39,7 +39,7 @@ void SceneGame::Init()
 		zombie->SetActive(false);
 		zombiePool.push_back(zombie);
 	}
-	
+
 	Scene::Init();
 }
 
@@ -57,6 +57,8 @@ void SceneGame::Enter()
 	Scene::Enter();
 	cursor.setTexture(TEXTURE_MGR.Get("graphics/crosshair.png"));
 	Utils::SetOrigin(cursor, Origins::MC);
+	SpawnZombie(Variable::wave * 5);
+	SpawnItem(Variable::wave * 5);
 }
 
 void SceneGame::Exit()
@@ -81,6 +83,7 @@ void SceneGame::Exit()
 void SceneGame::Update(float dt)
 {
 	cursor.setPosition(ScreenToUi(InputMgr::GetMousePosition()));
+	worldView.setCenter(player->GetPosition());
 	Scene::Update(dt);
 
 	auto it = zombieList.begin();
@@ -111,13 +114,13 @@ void SceneGame::Update(float dt)
 		}
 	}
 
-	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
-	{
-		SpawnZombie(Variable::wave * 5);
-		SpawnItem(Variable::wave * 5);
-	}
+	//if (InputMgr::GetKeyDown(sf::Keyboard::Space))
+	//{
+	//	SpawnZombie(Variable::wave * 5);
+	//	SpawnItem(Variable::wave * 5);
+	//}
 
-	
+
 }
 
 void SceneGame::Draw(sf::RenderWindow& window)
@@ -146,7 +149,7 @@ void SceneGame::SpawnZombie(int count)
 
 		zombie->SetType((Zombie::Type)Utils::RandomRange(0, Zombie::TotalType));
 		zombie->Reset();
-		zombie->SetPosition(Utils::RandomInUnitCircle() * 500.f);
+		zombie->SetPosition(Utils::RandomInUnitCircle() * (200.f * Variable::wave));
 		zombieList.push_back(zombie);
 	}
 }

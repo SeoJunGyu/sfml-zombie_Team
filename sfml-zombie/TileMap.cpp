@@ -8,6 +8,8 @@ TileMap::TileMap(const std::string& name)
 
 void TileMap::Set(const sf::Vector2i& count, const sf::Vector2f& size)
 {
+	rs.setSize({ (count.x - 3) * size.x, (count.y - 3) * size.x });
+	Utils::SetOrigin(rs, Origins::MC);
 	
 	cellCount = count;
 	cellSize = size;
@@ -41,10 +43,7 @@ void TileMap::Set(const sf::Vector2i& count, const sf::Vector2f& size)
 			int quadIdx = i * count.x + j;
 			
 			sf::Vector2f quadPos = { j * size.x,i * size.y };
-			if (texIdx == 3)
-			{
-				sf::FloatRect rect(quadPos.x, quadPos.y, size.x, size.y);
-			}
+			
 			for (int k = 0; k < 4; k++)
 			{
 				int vertexIdx = quadIdx * 4 + k;
@@ -142,8 +141,6 @@ void TileMap::Reset()
 	SetPosition({ 0.f, 0.f });
 	
 
-	
-
 }
 
 void TileMap::Update(float dt)
@@ -157,5 +154,7 @@ void TileMap::Draw(sf::RenderWindow& window)
 	state.texture = texture;
 	state.transform = transform;
 	window.draw(va, state);
+	
+
 	
 }

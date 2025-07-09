@@ -35,6 +35,8 @@ protected:
 	float attacInterval = 0.1f;
 	float attackTimer = 0.f;
 
+	TileMap* tileMap;
+
 public:
 	Player(const std::string& name = "");
 	virtual ~Player() = default;

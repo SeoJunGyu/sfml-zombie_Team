@@ -14,7 +14,9 @@ protected:
 
 	sf::Vector2i cellCount;
 	sf::Vector2f cellSize;
-
+	sf::RectangleShape rs;
+	HitBox hitbox;
+	
 	
 public:
 	TileMap(const std::string& name = "");
@@ -27,7 +29,7 @@ public:
 	void SetScale(const sf::Vector2f& s) override;
 	void SetOrigin(const sf::Vector2f& o) override;
 	void SetOrigin(Origins preset) override;
-
+	sf::RectangleShape GetBounds() const { return rs; }
 	void UpdateTransForm();
 
 	void Init() override;

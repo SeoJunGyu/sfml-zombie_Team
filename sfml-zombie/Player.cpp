@@ -83,11 +83,14 @@ void Player::Reset()
 	uihud = (UiHud*)SCENE_MGR.GetCurrentScene()->FindGameObject("UiHud");
 	uihud->SetTextBulletCount(ammo, maxAmmo);
 	uihud->SetHpBar((float)hp / maxHp);
+
+	tileMap = (TileMap*)SCENE_MGR.GetCurrentScene()->FindGameObject("TileMap");
 }
 
 
 void Player::Update(float dt)
 {
+	sf::RectangleShape mapBounds = tileMap->GetBounds();
 	auto it = bulletList.begin();
 	while ( it != bulletList.end())
 	{
@@ -108,9 +111,14 @@ void Player::Update(float dt)
 	{
 		Utils::Normalize(direction);
 	}
-	
-	SetPosition(position + direction * speed * dt);
+	sf::Vector2f pos = position + direction * speed * dt;
+	if (!Utils::CheckCollision(mapBounds, hitBox.rect))
+	{
+		pos.x = Utils::Clamp(pos.x, mapBounds.getGlobalBounds().left, mapBounds.getGlobalBounds().left + mapBounds.getGlobalBounds().width);
+		pos.y = Utils::Clamp(pos.y, mapBounds.getGlobalBounds().top, mapBounds.getGlobalBounds().top + mapBounds.getGlobalBounds().height);
 
+	}
+	SetPosition(pos);
 	sf::Vector2i mousePos = InputMgr::GetMousePosition();
 	sf::Vector2f mouseWorldPos = sceneGame->ScreenToWorld(mousePos);
 	look = Utils::GetNormal(mouseWorldPos - GetPosition());
