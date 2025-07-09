@@ -19,6 +19,7 @@ protected:
 	std::list<Item*> itemList;
 	std::list<Item*> itemPool;
 
+
 	sf::Sprite cursor;
 	UiHud* uiHud;
 public:

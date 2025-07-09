@@ -80,10 +80,38 @@ void Player::Reset()
 
 	hp = maxHp;
 	look = { 1.f , 0.f };
-	
+	if (Variable::fireRateBoost)
+	{
+		attackInterval = 0.05f;  // 발사 간격 빨라짐
+		Variable::fireRateBoost = false;
+	} 
+
+	if (Variable::largerClipNextReload)
+	{
+		maxReload += 3;  // 다음 리로드에 장탄수 증가
+		Variable::largerClipNextReload = false;
+	}
+
+	if (Variable::healthBoost)
+	{
+		maxHp += 500;
+		hp = maxHp;
+		Variable::healthBoost = false;
+	}
+
+	if (Variable::fasterMovement)
+	{
+		speed += 200.f;
+		Variable::fasterMovement = false;
+	}
+
+	// UI 연결
 	uihud = (UiHud*)SCENE_MGR.GetCurrentScene()->FindGameObject("UiHud");
-	uihud->SetTextBulletCount(ammo, maxAmmo);
-	uihud->SetHpBar((float)hp / maxHp);
+	if (uihud)
+	{
+		uihud->SetTextBulletCount(ammo, maxAmmo);
+		uihud->SetHpBar((float)hp / maxHp);
+	}
 
 	tileMap = (TileMap*)SCENE_MGR.GetCurrentScene()->FindGameObject("TileMap");
 }
@@ -125,13 +153,15 @@ void Player::Update(float dt)
 	look = Utils::GetNormal(mouseWorldPos - GetPosition());
 	SetRotation(Utils::Angle(look));
 
-	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
+	attackTimer += dt;
+	if (InputMgr::GetMouseButton(sf::Mouse::Left) && attackTimer > attackInterval)
 	{
 		if (ammo > 0)
 		{
 			Shoot();
 			ammo--;
 			uihud->SetTextBulletCount(ammo, maxAmmo);
+			attackTimer = 0.f;
 		}
 	}
 
