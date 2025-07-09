@@ -4,8 +4,8 @@
 
 enum class SortingLayers
 {
-	BackGround,
-	ForeGround,
+	Background,
+	Foreground,
 	Default,
 	UiView,
 };
@@ -32,4 +32,10 @@ enum class Sides
 	Left,
 	Right,
 	None,
+};
+enum class Waves
+{
+	Wave1,
+	Wave2,
+	Wave3,
 };

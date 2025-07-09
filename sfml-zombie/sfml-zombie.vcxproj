@@ -158,6 +158,8 @@
     </ClCompile>
     <ClCompile Include="Framework\TextGo.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
+    <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="UiHud.cpp" />
     <ClCompile Include="Variable.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
@@ -180,6 +182,8 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Framework\TextGo.h" />
     <ClInclude Include="Framework\Utils.h" />
+    <ClInclude Include="TileMap.h" />
+    <ClInclude Include="UiHud.h" />
     <ClInclude Include="Variable.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>

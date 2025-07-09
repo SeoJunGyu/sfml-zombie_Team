@@ -3,6 +3,7 @@
 
 class Zombie;
 class Player;
+class UiHud;
 
 class SceneGame :
     public Scene
@@ -14,6 +15,9 @@ protected:
 	std::list<Zombie*> zombieList;
 	std::list<Zombie*> zombiePool;
 
+
+	sf::Sprite cursor;
+	UiHud* uiHud;
 public:
 	SceneGame();
 	~SceneGame() = default;
