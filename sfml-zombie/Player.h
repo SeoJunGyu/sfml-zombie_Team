@@ -63,11 +63,14 @@ public:
 	}
 
 	const HitBox& GetHitBox() { return hitBox; }
-	void SetHp(int hp) { this->hp = hp; }
+	void SetHp(int hp) { this->hp += hp; }
 	int GetHp() const { return hp; }
 	void SetAmmo(int ammo) { maxAmmo += ammo; }
 	int GetAmmo() const { return ammo; }
+	int GetMaxAmmo() const { return maxAmmo; }
 	void OnDamage(int damage);
+
+	void Reload();
 
 	bool IsAlive() { return hp > 0; }
 };

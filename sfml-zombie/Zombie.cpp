@@ -83,6 +83,7 @@ void Zombie::Update(float dt)
 		if (Utils::CheckCollision(hitBox.rect, player->GetHitBox().rect))
 		{
 			player->OnDamage(damage);
+			attackTimer = 0.f;
 		}
 	}
 }

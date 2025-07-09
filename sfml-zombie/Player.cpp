@@ -4,6 +4,7 @@
 #include "Bullet.h"
 #include "TileMap.h"
 #include "UiHud.h"
+
 Player::Player(const std::string& name)
 	: GameObject(name)
 {
@@ -93,7 +94,7 @@ void Player::Update(float dt)
 	{
 		if (!(*it)->GetActive())
 		{
-			bulletPool.push_back(*it); //����̱⶧���� �����Ϳ����� �ʿ�
+			bulletPool.push_back(*it);
 			it = bulletList.erase(it);
 		}
 		else 
@@ -118,7 +119,6 @@ void Player::Update(float dt)
 
 	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
 	{
-		//std::cout << ammo << std::endl;
 		if (ammo > 0)
 		{
 			Shoot();
@@ -129,12 +129,7 @@ void Player::Update(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::R))
 	{
-		if (ammo + maxAmmo > maxReload)
-		{
-			
-		}
-		ammo += maxAmmo;
-
+		Reload();
 	}
 
 	hitBox.UpdateTransform(body, GetLocalBounds());
@@ -152,12 +147,32 @@ void Player::OnDamage(int damage)
 	{
 		return;
 	}
+
 	uihud->SetHpBar((float)hp/maxHp);
 	hp = Utils::Clamp(hp - damage, 0, maxHp);
 	if (hp == 0)
 	{
 		Variable::wave++;
 		SCENE_MGR.ChangeScene(SceneIds::Game);
+	}
+}
+
+void Player::Reload()
+{
+	if (maxAmmo > 0)
+	{
+		if (maxReload - ammo > maxAmmo)
+		{
+			ammo += maxAmmo;
+			maxAmmo = 0;
+			uihud->SetTextBulletCount(ammo, maxAmmo);
+		}
+		else
+		{
+			maxAmmo -= maxReload - ammo;
+			ammo += maxReload - ammo;
+			uihud->SetTextBulletCount(ammo, maxAmmo);
+		}
 	}
 }
 
@@ -175,8 +190,6 @@ void Player::Shoot()
 		bulletPool.pop_front();
 		bullet->SetActive(true);
 	}
-	
-	
 	
 	bullet->Reset();
 	bullet->Fire(position + look * 10.f, look, 1000.f, 10);
