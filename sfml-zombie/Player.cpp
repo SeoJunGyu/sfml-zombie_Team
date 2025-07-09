@@ -81,7 +81,7 @@ void Player::Reset()
 	look = { 1.f , 0.f };
 	
 	uihud = (UiHud*)SCENE_MGR.GetCurrentScene()->FindGameObject("UiHud");
-	uihud->SetTextBulletCount(bulletCount, maxbulletCount);
+	uihud->SetTextBulletCount(ammo, maxAmmo);
 	uihud->SetHpBar((float)hp / maxHp);
 }
 
@@ -118,12 +118,12 @@ void Player::Update(float dt)
 
 	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
 	{
-		std::cout << bulletCount << std::endl;
-		uihud->SetTextBulletCount(bulletCount, maxbulletCount);
+		//std::cout << ammo << std::endl;
 		if (ammo > 0)
 		{
 			Shoot();
 			ammo--;
+			uihud->SetTextBulletCount(ammo, maxAmmo);
 		}
 	}
 
