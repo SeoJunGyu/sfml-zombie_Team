@@ -59,7 +59,6 @@ void SceneGame::Enter()
 
 void SceneGame::Exit()
 {
-	//Ȱ�� ���� ��Ȱ��ȭ
 	for (Zombie* zombie : zombieList)
 	{
 		zombie->SetActive(false);
@@ -74,18 +73,14 @@ void SceneGame::Update(float dt)
 {
 	cursor.setPosition(ScreenToUi(InputMgr::GetMousePosition()));
 	Scene::Update(dt);
-	Scene::Update(dt);
-	//std::cout << player->GetPosition().x << ", " << player->GetPosition().y << std::endl;
 
 	auto it = zombieList.begin();
 	while (it != zombieList.end())
 	{
-		//��Ȱ��ȭ�Ǿ��ִٸ�
 		if (!(*it)->GetActive())
 		{
-			//��Ȱ��ȭ ��Ͽ� �ְ�, Ȱ�� ��Ͽ��� �����.
 			zombiePool.push_back(*it);
-			zombieList.erase(it);
+			it = zombieList.erase(it);
 		}
 		else
 		{
@@ -95,7 +90,7 @@ void SceneGame::Update(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
 	{
-		SpawnZombie(10);
+		SpawnZombie(Variable::wave * 5);
 	}
 
 	

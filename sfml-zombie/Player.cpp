@@ -88,7 +88,7 @@ void Player::Update(float dt)
 		if (!(*it)->GetActive())
 		{
 			bulletPool.push_back(*it); //요소이기때문에 포인터연산자 필요
-			bulletList.erase(it);
+			it = bulletList.erase(it);
 		}
 		else 
 		{
