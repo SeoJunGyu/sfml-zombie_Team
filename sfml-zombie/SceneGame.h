@@ -15,6 +15,7 @@ protected:
 
 	std::list<Zombie*> zombieList;
 	std::list<Zombie*> zombiePool;
+	std::list<Zombie*> zombieErase;
 
 	std::list<Item*> itemList;
 	std::list<Item*> itemPool;

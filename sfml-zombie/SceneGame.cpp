@@ -56,33 +56,26 @@ void SceneGame::Enter()
 	uiView.setSize(windowSize);
 	uiView.setCenter(windowSize * .5f);
 
-	auto it = zombieList.begin();
-	while (it != zombieList.end())
-	{
-		if (!(*it)->GetAlive())
-		{
-			zombiePool.push_back(*it);
-			(*it)->SetActive(false);
-			it = zombieList.erase(it);
-		}
-		else
-		{
-			it++;
-		}
-	}
-
+	
 	Scene::Enter();
+
 	cursor.setTexture(TEXTURE_MGR.Get("graphics/crosshair.png"));
 	Utils::SetOrigin(cursor, Origins::MC);
 	zombieCount = Variable::wave * 5;
 	SpawnZombie(zombieCount);
 	SpawnItem(Variable::wave * 5);
 	uiHud->SetTextScore(score);
+	std::cout << zombieList.size() << std::endl;
 }
 
 void SceneGame::Exit()
 {
 	for (Zombie* zombie : zombieList)
+	{
+		zombie->SetActive(false);
+		zombiePool.push_back(zombie);
+	}
+	for (Zombie* zombie : zombieErase)
 	{
 		zombie->SetActive(false);
 		zombiePool.push_back(zombie);
@@ -111,7 +104,8 @@ void SceneGame::Update(float dt)
 	{
 		if ((*it)->GetTexId() == "graphics/blood.png")
 		{
-			zombiePool.push_back(*it);
+			
+			zombieErase.push_back(*it);
 			it = zombieList.erase(it);
 			zombieCount--;
 			score += 10;
