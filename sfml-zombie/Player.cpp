@@ -60,6 +60,7 @@ void Player::Reset()
 	{
 		sceneGame = nullptr;
 	}
+
 	for (Bullet* bullet : bulletList)
 	{
 		bullet->SetActive(false);
@@ -95,6 +96,7 @@ void Player::Update(float dt)
 			++it;
 		}
 	}
+
 	direction.x = InputMgr::GetAxis(Axis::Horizontal);
 	direction.y = InputMgr::GetAxis(Axis::Vertical);
 	if (Utils::Magnitude(direction) > 1.f)
@@ -102,6 +104,7 @@ void Player::Update(float dt)
 		Utils::Normalize(direction);
 	}
 	SetPosition(position + direction * speed * dt);
+
 	sf::Vector2i mousePos = InputMgr::GetMousePosition();
 	sf::Vector2f mouseWorldPos = sceneGame->ScreenToWorld(mousePos);
 	look = Utils::GetNormal(mouseWorldPos - GetPosition());
@@ -154,6 +157,5 @@ void Player::Shoot()
 
 	bulletList.push_back(bullet);
 	sceneGame->AddGameObject(bullet);
-
 
 }

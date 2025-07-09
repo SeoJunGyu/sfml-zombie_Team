@@ -41,6 +41,10 @@ void Item::SetOrigin(Origins preset)
 
 void Item::Init()
 {
+	sortingLayer = SortingLayers::Foreground;
+	sortingOrder = -1;
+
+	SetType(type);
 }
 
 void Item::Release()
@@ -49,6 +53,7 @@ void Item::Release()
 
 void Item::Reset()
 {
+
 }
 
 void Item::Update(float dt)
@@ -57,4 +62,9 @@ void Item::Update(float dt)
 
 void Item::Draw(sf::RenderWindow& window)
 {
+}
+
+void Item::SetType(Type type)
+{
+
 }

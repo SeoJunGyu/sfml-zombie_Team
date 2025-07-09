@@ -29,5 +29,9 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	void SpawnZombie(int count);
+	const std::list<Zombie*>& GetZombies() const
+	{
+		return zombieList;
+	}
 };
 

@@ -16,18 +16,17 @@ void SceneGame::Init()
 	texIds.push_back("graphics/background_sheet.png");
 	texIds.push_back("graphics/crosshair.png");
 	texIds.push_back("graphics/ammo_icon.png");
-	fontIds.push_back("fonts/zombiecontrol.ttf");
-
-	
-	AddGameObject(new TileMap("TileMap"));
-	
-	uiHud = (UiHud*)AddGameObject(new UiHud("UiHud"));
-	
 	texIds.push_back("graphics/bloater.png");
 	texIds.push_back("graphics/chaser.png");
 	texIds.push_back("graphics/crawler.png");
 	texIds.push_back("graphics/player.png");
 	texIds.push_back("graphics/bullet.png");
+
+	fontIds.push_back("fonts/zombiecontrol.ttf");
+
+	AddGameObject(new TileMap("TileMap"));
+
+	uiHud = (UiHud*)AddGameObject(new UiHud("UiHud"));
 
 	player = (Player*)AddGameObject(new Player("Player"));
 

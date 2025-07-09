@@ -1,7 +1,10 @@
 #pragma once
 #include "GameObject.h"
+#include "HitBox.h"
 
 class SceneGame;
+class Zombie;
+
 class Bullet :
     public GameObject
 {
@@ -14,6 +17,8 @@ protected:
 	int damage = 0;
 
 	SceneGame* sceneGame;
+	Zombie* zombie;
+	HitBox hitbox;
 
 public:
 	Bullet(const std::string& name = "");
@@ -40,6 +45,11 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
 	void Fire(const sf::Vector2f pos, const sf::Vector2f dir, float s, int d);
+	HitBox& GetHitbox()
+	{
+		return hitbox;
+	}
 };
 

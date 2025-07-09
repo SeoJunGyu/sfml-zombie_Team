@@ -1,14 +1,16 @@
 #pragma once
 #include "GameObject.h"
+#include "HitBox.h"
+
 class Item :
     public GameObject
 {
 public:
 	enum Type
 	{
-		ammo,
-		health,
-		count,
+		Ammo,
+		Health,
+		Count,
 	};
 
 protected:
@@ -17,7 +19,9 @@ protected:
 
 	int value = 0; //장탄수 혹은 회복값
 
-	
+	HitBox hitBox;
+
+	Type type = Type::Ammo;
 
 public:
 	Item(const std::string& name = "");
@@ -34,5 +38,19 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	void SetType(Type type);
+
+	sf::FloatRect GetLocalBounds() const override
+	{
+		return body.getLocalBounds();
+	}
+
+	sf::FloatRect GetGlobalBounds() const override
+	{
+		return body.getGlobalBounds();
+	}
+
+	const HitBox& GetHitBox() { return hitBox; }
 };
 

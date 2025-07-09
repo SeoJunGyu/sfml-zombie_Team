@@ -63,6 +63,7 @@ void Zombie::Reset()
 	SetScale({ 1.f, 1.f });
 
 	hp = maxHp;
+	attackTimer = 0.f;
 }
 
 void Zombie::Update(float dt)
@@ -117,5 +118,14 @@ void Zombie::SetType(Type type)
 		damage = 100;
 		attackInterval = 1.f;
 		break;
+	}
+}
+
+void Zombie::OnDamage(int damage)
+{
+	hp = Utils::Clamp(hp - damage, 0, maxHp);
+	if (hp == 0)
+	{
+		SetActive(false);
 	}
 }
