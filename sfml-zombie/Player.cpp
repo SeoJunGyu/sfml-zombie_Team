@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "SceneGame.h"
 #include "Bullet.h"
-
+#include "TileMap.h"
 Player::Player(const std::string& name)
 	: GameObject(name)
 {
@@ -77,6 +77,8 @@ void Player::Reset()
 
 	hp = maxHp;
 	look = { 1.f , 0.f };
+	
+	
 }
 
 
@@ -101,6 +103,7 @@ void Player::Update(float dt)
 	{
 		Utils::Normalize(direction);
 	}
+	
 	SetPosition(position + direction * speed * dt);
 	sf::Vector2i mousePos = InputMgr::GetMousePosition();
 	sf::Vector2f mouseWorldPos = sceneGame->ScreenToWorld(mousePos);
@@ -131,6 +134,7 @@ void Player::OnDamage(int damage)
 	hp = Utils::Clamp(hp - damage, 0, maxHp);
 	if (hp == 0)
 	{
+		Variable::wave++;
 		SCENE_MGR.ChangeScene(SceneIds::Game);
 	}
 }

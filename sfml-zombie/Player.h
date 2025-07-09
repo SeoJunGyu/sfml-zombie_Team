@@ -4,8 +4,8 @@
 
 class SceneGame;
 class Bullet;
-class Player :
-    public GameObject
+class TileMap;
+class Player :  public GameObject
 {
 protected:
 	sf::Sprite body;
@@ -21,9 +21,13 @@ protected:
 	int maxHp = 1000;
 	int hp = 0;
 
+	int bulletCount = 0;
+	int maxbulletCount = 24;
+
 	std::list<Bullet*>bulletList;
 	std::list<Bullet*>bulletPool;
 
+	
 public:
 	Player(const std::string& name = "");
 	virtual ~Player() = default;
@@ -33,6 +37,10 @@ public:
 	void SetScale(const sf::Vector2f& s) override;
 	void SetOrigin(const sf::Vector2f& o) override;
 	void SetOrigin(Origins preset) override;
+	int GetMaxHp() const { return maxHp; }
+	int GetHp() const { return hp; }
+	int GetBulletCount() const { return bulletCount; }
+	int GetMaxBulletCount() const { return maxbulletCount; }
 
 	void Init() override;
 	void Release() override;

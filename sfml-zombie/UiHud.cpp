@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "UiHud.h"
+#include "Player.h"
 
 
 UiHud::UiHud(const std::string& name)
@@ -9,7 +10,7 @@ UiHud::UiHud(const std::string& name)
 
 void UiHud::SetTextScore(int score)
 {
-	textScore.setFont(FONT_MGR.Get(FontId));
+	
 	textScore.setString("Score : " + std::to_string(score));
 	textScore.setPosition(0, 0);
 	textScore.setCharacterSize(50);
@@ -19,7 +20,7 @@ void UiHud::SetTextScore(int score)
 
 void UiHud::SetTextHighScore(int score)
 {
-	textHighScore.setFont(FONT_MGR.Get(FontId));
+	
 	textHighScore.setString("High Score : " + std::to_string(score));
 	textHighScore.setPosition(1920, 0);
 	textHighScore.setCharacterSize(50);
@@ -29,7 +30,7 @@ void UiHud::SetTextHighScore(int score)
 
 void UiHud::SetTextWave()
 {
-	textWave.setFont(FONT_MGR.Get(FontId));
+
 	textWave.setString("Wave : " + std::to_string(Variable::wave));
 	textWave.setPosition(1400, 1000);
 	textWave.setCharacterSize(50);
@@ -38,11 +39,24 @@ void UiHud::SetTextWave()
 
 void UiHud::SetTextZombie(int count)
 {
-	textZombieCount.setFont(FONT_MGR.Get(FontId));;
-	textZombieCount.setString("Zombie : " + std::to_string(count));
-	textZombieCount.setPosition(1700, 1000);
-	textZombieCount.setCharacterSize(50);
-	Utils::SetOrigin(textZombieCount, Origins::BC);;
+	
+	textZombie.setString("Zombie : " + std::to_string(count));
+	textZombie.setPosition(1700, 1000);
+	textZombie.setCharacterSize(50);
+	Utils::SetOrigin(textZombie, Origins::BC);;
+}
+
+void UiHud::SetTextBulletCount()
+{
+	textBullet.setString(std::to_string(player->GetBulletCount()) + " / " + std::to_string(player->GetMaxBulletCount()));
+	textBullet.setPosition(200, 1000);
+	textBullet.setCharacterSize(50);
+	Utils::SetOrigin(textBullet, Origins::BC);
+}
+
+void UiHud::SetHpBar(float value)
+{
+	hpBar.setSize({ hpBarSize.x * value, hpBarSize.y });
 }
 
 void UiHud::SetPosition(const sf::Vector2f& pos)
@@ -75,9 +89,6 @@ void UiHud::Init()
 {
 	sortingLayer = SortingLayers::UiView;
 	sortingOrder = 0;
-	
-	
-
 
 }
 
@@ -87,16 +98,28 @@ void UiHud::Release()
 
 void UiHud::Reset()
 {
+
+	player = (Player*)SCENE_MGR.GetCurrentScene()->FindGameObject("Player");
+
 	bullets.setTexture(TEXTURE_MGR.Get(BulletsId));
 	bullets.setPosition(0, 950);
-
+	textScore.setFont(FONT_MGR.Get(FontId));
+	textZombie.setFont(FONT_MGR.Get(FontId));;
+	textHighScore.setFont(FONT_MGR.Get(FontId));
+	textWave.setFont(FONT_MGR.Get(FontId));
+	textBullet.setFont(FONT_MGR.Get(FontId));
 	
 	SetTextScore(Variable::score);
-	
 	SetTextHighScore(Variable::score);
 	SetTextWave();
 	SetTextZombie(10);
-	
+	SetTextBulletCount();
+
+	hpBarSize = { 400.f,50.f };
+	hpBar.setFillColor(sf::Color::Red);
+	hpBar.setSize(hpBarSize);
+	Utils::SetOrigin(hpBar, Origins::BL);
+	hpBar.setPosition(300, 1000);
 }
 
 void UiHud::Update(float dt)
@@ -109,5 +132,7 @@ void UiHud::Draw(sf::RenderWindow& window)
 	window.draw(textScore);
 	window.draw(textHighScore);
 	window.draw(textWave);
-	window.draw(textZombieCount);
+	window.draw(textZombie);
+	window.draw(textBullet);
+	window.draw(hpBar);
 }

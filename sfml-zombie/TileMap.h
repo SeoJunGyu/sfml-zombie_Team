@@ -1,5 +1,7 @@
 #pragma once
 #include "GameObject.h"
+#include "TileMap.h"
+#include "HitBox.h"
 class TileMap : public GameObject
 {
 
@@ -7,14 +9,13 @@ protected:
 	sf::VertexArray va;
 	std::string spriteSheetId = "graphics/background_sheet.png";
 	sf::Texture* texture = nullptr;
-	sf::Transform transform; // <- ????
+	sf::Transform transform; 
 
 
 	sf::Vector2i cellCount;
 	sf::Vector2f cellSize;
 
-
-
+	
 public:
 	TileMap(const std::string& name = "");
 	virtual ~TileMap() = default;

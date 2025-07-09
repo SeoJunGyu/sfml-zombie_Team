@@ -18,6 +18,7 @@ void HitBox::UpdateTransform(const sf::Transformable& shape, const sf::FloatRect
 	rect.setOrigin(shape.getOrigin());
 }
 
+
 void HitBox::Draw(sf::RenderWindow& window)
 {
 	if (Variable::isDrawHitBox)
