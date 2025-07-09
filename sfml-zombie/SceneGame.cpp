@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "SceneGame.h"
+#include "TileMap.h"
+#include "UiHud.h"
 #include "Player.h"
 #include "Zombie.h"
 #include "Bullet.h"
@@ -11,11 +13,20 @@ SceneGame::SceneGame()
 
 void SceneGame::Init()
 {
+	texIds.push_back("graphics/background_sheet.png");
+	texIds.push_back("graphics/crosshair.png");
+	texIds.push_back("graphics/ammo_icon.png");
 	texIds.push_back("graphics/bloater.png");
 	texIds.push_back("graphics/chaser.png");
 	texIds.push_back("graphics/crawler.png");
 	texIds.push_back("graphics/player.png");
 	texIds.push_back("graphics/bullet.png");
+
+	fontIds.push_back("fonts/zombiecontrol.ttf");
+
+	AddGameObject(new TileMap("TileMap"));
+
+	uiHud = (UiHud*)AddGameObject(new UiHud("UiHud"));
 
 	player = (Player*)AddGameObject(new Player("Player"));
 
@@ -31,18 +42,22 @@ void SceneGame::Init()
 
 void SceneGame::Enter()
 {
+	FRAMEWORK.GetWindow().setMouseCursorVisible(false);
+
 	sf::Vector2f windowSize = FRAMEWORK.GetWindowSizeF();
+
 	worldView.setSize(windowSize);
 	worldView.setCenter({ 0.f, 0.f });
 	uiView.setSize(windowSize);
 	uiView.setCenter(windowSize * .5f);
 
 	Scene::Enter();
+	cursor.setTexture(TEXTURE_MGR.Get("graphics/crosshair.png"));
+	Utils::SetOrigin(cursor, Origins::MC);
 }
 
 void SceneGame::Exit()
 {
-	//활성 좀비 비활성화
 	for (Zombie* zombie : zombieList)
 	{
 		zombie->SetActive(false);
@@ -55,16 +70,14 @@ void SceneGame::Exit()
 
 void SceneGame::Update(float dt)
 {
+	cursor.setPosition(ScreenToUi(InputMgr::GetMousePosition()));
 	Scene::Update(dt);
-	//std::cout << player->GetPosition().x << ", " << player->GetPosition().y << std::endl;
 
 	auto it = zombieList.begin();
 	while (it != zombieList.end())
 	{
-		//비활성화되어있다면
 		if (!(*it)->GetActive())
 		{
-			//비활성화 목록에 넣고, 활성 목록에서 지운다.
 			zombiePool.push_back(*it);
 			it = zombieList.erase(it);
 		}
@@ -76,7 +89,7 @@ void SceneGame::Update(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
 	{
-		SpawnZombie(10);
+		SpawnZombie(Variable::wave * 5);
 	}
 
 	
@@ -85,8 +98,9 @@ void SceneGame::Update(float dt)
 void SceneGame::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
+	window.setView(uiView);
+	window.draw(cursor);
 }
-
 
 void SceneGame::SpawnZombie(int count)
 {

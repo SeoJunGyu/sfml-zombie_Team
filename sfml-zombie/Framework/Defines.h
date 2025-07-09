@@ -1,11 +1,13 @@
 #pragma once
 
+#define DEF_DEV
+
 enum class SortingLayers
 {
-	Background,//world view 
-	Foreground, //움직이는것 world view 
-	Default,// worldview
-	UI,
+	Background,
+	Foreground,
+	Default,
+	UiView,
 };
 
 enum class Origins
@@ -31,4 +33,10 @@ enum class Sides
 	Left,
 	Right,
 	None,
+};
+enum class Waves
+{
+	Wave1,
+	Wave2,
+	Wave3,
 };

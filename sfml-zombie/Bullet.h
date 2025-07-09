@@ -1,9 +1,10 @@
 #pragma once
-#include "GameObject.h"]
+#include "GameObject.h"
 #include "HitBox.h"
 
-class Zombie;
 class SceneGame;
+class Zombie;
+
 class Bullet :
     public GameObject
 {
@@ -15,7 +16,7 @@ protected:
 	float speed = 0.f;
 	int damage = 0;
 
-	SceneGame* sceneGame;	
+	SceneGame* sceneGame;
 	Zombie* zombie;
 	HitBox hitbox;
 
@@ -44,8 +45,8 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
-	void Fire(const sf::Vector2f pos, const sf::Vector2f dir, float s, int d);
 
+	void Fire(const sf::Vector2f pos, const sf::Vector2f dir, float s, int d);
 	HitBox& GetHitbox()
 	{
 		return hitbox;

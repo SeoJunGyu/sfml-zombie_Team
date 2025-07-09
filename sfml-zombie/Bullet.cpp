@@ -3,7 +3,6 @@
 #include "SceneGame.h"
 #include "Zombie.h"
 
-
 Bullet::Bullet(const std::string& name)
 	: GameObject(name)
 {
@@ -44,7 +43,7 @@ void Bullet::SetOrigin(Origins preset)
 
 void Bullet::Init()
 {
-	sortingLayer = SortingLayers::ForeGround;
+	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 1;
 }
 

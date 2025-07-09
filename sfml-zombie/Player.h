@@ -4,6 +4,7 @@
 
 class SceneGame;
 class Bullet;
+
 class Player :
     public GameObject
 {
@@ -54,10 +55,7 @@ public:
 		return body.getGlobalBounds();
 	}
 
-	const HitBox& GetHitBox() 
-	{
-		return hitBox; 
-	}
+	const HitBox& GetHitBox() { return hitBox; }
 	void OnDamage(int damage);
 
 	bool IsAlive() { return hp > 0; }

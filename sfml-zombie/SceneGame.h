@@ -3,6 +3,7 @@
 
 class Zombie;
 class Player;
+class UiHud;
 
 class SceneGame :
     public Scene
@@ -14,6 +15,9 @@ protected:
 	std::list<Zombie*> zombieList;
 	std::list<Zombie*> zombiePool;
 
+
+	sf::Sprite cursor;
+	UiHud* uiHud;
 public:
 	SceneGame();
 	~SceneGame() = default;
@@ -23,11 +27,11 @@ public:
 	void Exit() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	void SpawnZombie(int count);
 	const std::list<Zombie*>& GetZombies() const
 	{
 		return zombieList;
 	}
-
-	void SpawnZombie(int count);
 };
 

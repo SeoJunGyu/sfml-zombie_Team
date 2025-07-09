@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Framework.h"
 
+
 void Framework::Init(int w, int h, const std::string& t)
 {
 	window.create(sf::VideoMode(w, h), t);
@@ -36,6 +37,11 @@ void Framework::Do()
         InputMgr::Update(deltaTime);
 
         // Update
+        if (InputMgr::GetKeyDown(sf::Keyboard::F10))
+        {
+            Variable::isDrawHitBox = !Variable::isDrawHitBox;
+        }
+
         SCENE_MGR.Update(deltaTime);
 
         // Draw

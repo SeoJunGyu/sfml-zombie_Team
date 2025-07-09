@@ -42,7 +42,7 @@ void Zombie::SetOrigin(Origins preset)
 
 void Zombie::Init()
 {
-	sortingLayer = SortingLayers::ForeGround;
+	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 0;
 
 	SetType(type);
@@ -83,7 +83,6 @@ void Zombie::Update(float dt)
 		if (Utils::CheckCollision(hitBox.rect, player->GetHitBox().rect))
 		{
 			player->OnDamage(damage);
-			attackTimer = 0.f;
 		}
 	}
 }
@@ -93,7 +92,6 @@ void Zombie::Draw(sf::RenderWindow& window)
 	window.draw(body);
 	hitBox.Draw(window);
 }
-
 
 void Zombie::SetType(Type type)
 {
@@ -108,7 +106,7 @@ void Zombie::SetType(Type type)
 		break;
 	case Zombie::Chaser:
 		texId = "graphics/chaser.png";
-		speed = 300.f;
+		speed = 100.f;
 		maxHp = 100;
 		damage = 100;
 		attackInterval = 1.f;

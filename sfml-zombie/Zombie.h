@@ -63,7 +63,6 @@ public:
 	}
 
 	const HitBox& GetHitBox() { return hitBox; }
-
 	void OnDamage(int damage);
 };
 
