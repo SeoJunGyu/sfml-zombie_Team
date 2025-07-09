@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "HitBox.h"
 
+class Player;
+
 class Item :
     public GameObject
 {
@@ -19,6 +21,7 @@ protected:
 
 	int value = 0; //장탄수 혹은 회복값
 
+	Player* player = nullptr;
 	HitBox hitBox;
 
 	Type type = Type::Ammo;
@@ -52,5 +55,6 @@ public:
 	}
 
 	const HitBox& GetHitBox() { return hitBox; }
+	void OnInteract(int value);
 };
 

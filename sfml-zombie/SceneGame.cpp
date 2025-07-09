@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Zombie.h"
 #include "Bullet.h"
+#include "Item.h"
 
 SceneGame::SceneGame()
 	: Scene(SceneIds::Game)
@@ -16,6 +17,8 @@ void SceneGame::Init()
 	texIds.push_back("graphics/background_sheet.png");
 	texIds.push_back("graphics/crosshair.png");
 	texIds.push_back("graphics/ammo_icon.png");
+	texIds.push_back("graphics/ammo_pickup.png");
+	texIds.push_back("graphics/health_pickup.png");
 	texIds.push_back("graphics/bloater.png");
 	texIds.push_back("graphics/chaser.png");
 	texIds.push_back("graphics/crawler.png");
@@ -63,7 +66,14 @@ void SceneGame::Exit()
 		zombie->SetActive(false);
 		zombiePool.push_back(zombie);
 	}
+
+	for (Item* item : itemList)
+	{
+		item->SetActive(false);
+		itemPool.push_back(item);
+	}
 	zombieList.clear();
+	itemList.clear();
 
 	Scene::Exit();
 }
@@ -87,9 +97,24 @@ void SceneGame::Update(float dt)
 		}
 	}
 
+	auto itItem = itemList.begin();
+	while (itItem != itemList.end())
+	{
+		if (!(*itItem)->GetActive())
+		{
+			itemPool.push_back(*itItem);
+			itItem = itemList.erase(itItem);
+		}
+		else
+		{
+			itItem++;
+		}
+	}
+
 	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
 	{
 		SpawnZombie(Variable::wave * 5);
+		SpawnItem(Variable::wave * 5);
 	}
 
 	
@@ -123,5 +148,29 @@ void SceneGame::SpawnZombie(int count)
 		zombie->Reset();
 		zombie->SetPosition(Utils::RandomInUnitCircle() * 500.f);
 		zombieList.push_back(zombie);
+	}
+}
+
+void SceneGame::SpawnItem(int count)
+{
+	for (int i = 0; i < count; i++)
+	{
+		Item* item = nullptr;
+		if (itemPool.empty())
+		{
+			item = (Item*)AddGameObject(new Item());
+			item->Init();
+		}
+		else
+		{
+			item = itemPool.front();
+			itemPool.pop_front();
+			item->SetActive(true);
+		}
+
+		item->SetType((Item::Type)Utils::RandomRange(0, Item::Type::Count));
+		item->Reset();
+		item->SetPosition(Utils::RandomInUnitCircle() * 500.f);
+		itemList.push_back(item);
 	}
 }

@@ -110,9 +110,22 @@ void Player::Update(float dt)
 	look = Utils::GetNormal(mouseWorldPos - GetPosition());
 	SetRotation(Utils::Angle(look));
 
-	if (InputMgr::GetMouseButton(sf::Mouse::Left))
+	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
 	{
-		Shoot();
+		if (ammo > 0)
+		{
+			Shoot();
+			ammo--;
+		}
+	}
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::R))
+	{
+		if (ammo + maxAmmo > maxReload)
+		{
+			
+		}
+		ammo += maxAmmo;
 	}
 
 	hitBox.UpdateTransform(body, GetLocalBounds());

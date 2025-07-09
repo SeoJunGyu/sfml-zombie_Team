@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 class Zombie;
+class Item;
 class Player;
 class UiHud;
 
@@ -15,6 +16,8 @@ protected:
 	std::list<Zombie*> zombieList;
 	std::list<Zombie*> zombiePool;
 
+	std::list<Item*> itemList;
+	std::list<Item*> itemPool;
 
 	sf::Sprite cursor;
 	UiHud* uiHud;
@@ -29,6 +32,7 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	void SpawnZombie(int count);
+	void SpawnItem(int count);
 	const std::list<Zombie*>& GetZombies() const
 	{
 		return zombieList;

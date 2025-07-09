@@ -22,6 +22,10 @@ protected:
 	int maxHp = 1000;
 	int hp = 0;
 
+	int maxAmmo = 3;
+	int ammo = 3;
+	int maxReload = 6;
+
 	std::list<Bullet*>bulletList;
 	std::list<Bullet*>bulletPool;
 
@@ -56,6 +60,10 @@ public:
 	}
 
 	const HitBox& GetHitBox() { return hitBox; }
+	void SetHp(int hp) { this->hp = hp; }
+	int GetHp() const { return hp; }
+	void SetAmmo(int ammo) { maxAmmo += ammo; }
+	int GetAmmo() const { return ammo; }
 	void OnDamage(int damage);
 
 	bool IsAlive() { return hp > 0; }
