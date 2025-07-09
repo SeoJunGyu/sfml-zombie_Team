@@ -72,14 +72,24 @@ void SceneOption::Update(float dt)
 	sf::Vector2i mousePos = sf::Mouse::getPosition(FRAMEWORK.GetWindow());
 	sf::Vector2f worldPos = FRAMEWORK.GetWindow().mapPixelToCoords(mousePos, uiView);
 
-	for (auto& text : optionTexts)
+	for (size_t i = 0; i < optionTexts.size(); ++i)
 	{
+		auto& text = optionTexts[i];
 		if (text.getGlobalBounds().contains(worldPos))
 		{
 			text.setFillColor(sf::Color::Yellow); // hover
 			text.setScale(1.1f, 1.1f);
 			if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
 			{
+				switch (i)
+				{
+				case 0: Variable::fireRateBoost = true; break;
+				case 1: Variable::largerClipNextReload = true; break;
+				case 2: Variable::healthBoost = true; break;
+				case 3: Variable::fasterMovement = true; break;
+				case 4: Variable::betterHealthDrops = true; break;
+				case 5: Variable::betterAmmoDrops = true; break;
+				}
 				SCENE_MGR.ChangeScene(SceneIds::Game);
 				break;
 			}

@@ -153,7 +153,6 @@ void SceneGame::Update(float dt)
 	//	SpawnItem(Variable::wave * 5);
 	//}
 
-
 }
 
 void SceneGame::Draw(sf::RenderWindow& window)
@@ -190,6 +189,7 @@ void SceneGame::SpawnZombie(int count)
 
 void SceneGame::SpawnItem(int count)
 {
+
 	for (int i = 0; i < count; i++)
 	{
 		Item* item = nullptr;
@@ -205,9 +205,42 @@ void SceneGame::SpawnItem(int count)
 			item->SetActive(true);
 		}
 
-		item->SetType((Item::Type)Utils::RandomRange(0, Item::TypeCount));
+		int ammoWeight = 6;
+		int healthWeight = 6;
+		int otherWeight = 2;
+
+		if (Variable::betterAmmoDrops) ammoWeight += 14;
+		if (Variable::betterHealthDrops) healthWeight += 14;
+
+		int totalWeight = ammoWeight + healthWeight + otherWeight;
+		int rand = Utils::RandomRange(0, totalWeight);
+
+		std::cout << "[SpawnItem] ammoWeight=" << ammoWeight
+			<< ", healthWeight=" << healthWeight
+			<< ", otherWeight=" << otherWeight
+			<< ", totalWeight=" << totalWeight
+			<< ", rand=" << rand << std::endl;
+
+		Item::Type dropType = Item::Type::None;
+
+		if (rand < ammoWeight)
+		{
+			dropType = Item::Type::Ammo;
+		}
+		else if (rand < ammoWeight + healthWeight)
+		{
+			dropType = Item::Type::Health;
+		}
+		else
+		{
+			dropType = (Item::Type)Utils::RandomRange(0, Item::Type::Count);
+		}
+
+		std::cout << "[SpawnItem] DropType=" << (int)dropType << std::endl;
+
+		item->SetType(dropType);
 		item->Reset();
-		item->SetPosition(Utils::RandomInUnitCircle()* (200.f * Variable::wave));
-		itemList.push_back(item);
+		item->SetPosition(Utils::RandomInUnitCircle() * 500.f);
+		itemList.push_back(item); 
 	}
 }

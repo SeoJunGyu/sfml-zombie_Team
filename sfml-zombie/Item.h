@@ -14,6 +14,7 @@ public:
 		Ammo,
 		Health,
 		None,
+		Count,
 	};
 	static const int TypeCount = 3;
 
@@ -21,7 +22,7 @@ protected:
 	sf::Sprite body;
 	std::string texId;
 
-	int value = 0; //ÀåÅº¼ö È¤Àº È¸º¹°ª
+	int value = 0; //ï¿½ï¿½Åºï¿½ï¿½ È¤ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½
 
 	Player* player = nullptr;
 	UiHud* uiHud = nullptr;

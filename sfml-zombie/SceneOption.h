@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+class Player;
 class SceneOption :
     public Scene
 {
@@ -10,6 +11,7 @@ protected:
 	std::vector<sf::Text> optionTexts;
 	sf::Font font;
 
+	Player* player; 
 
 public:
 	SceneOption();
