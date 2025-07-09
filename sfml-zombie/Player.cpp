@@ -143,8 +143,8 @@ void Player::Update(float dt)
 	sf::Vector2f pos = position + direction * speed * dt;
 	if (!Utils::CheckCollision(mapBounds, hitBox.rect))
 	{
-		pos.x = Utils::Clamp(pos.x, mapBounds.getGlobalBounds().left, mapBounds.getGlobalBounds().left + mapBounds.getGlobalBounds().width);
-		pos.y = Utils::Clamp(pos.y, mapBounds.getGlobalBounds().top, mapBounds.getGlobalBounds().top + mapBounds.getGlobalBounds().height);
+		pos.x = Utils::Clamp(pos.x, mapBounds.getGlobalBounds().left -25, mapBounds.getGlobalBounds().left + mapBounds.getGlobalBounds().width  + 25);
+		pos.y = Utils::Clamp(pos.y, mapBounds.getGlobalBounds().top -25, mapBounds.getGlobalBounds().top + mapBounds.getGlobalBounds().height + 25);
 
 	}
 	SetPosition(pos);
@@ -190,7 +190,7 @@ void Player::OnDamage(int damage)
 	hp = Utils::Clamp(hp - damage, 0, maxHp);
 	if (hp == 0)
 	{
-		Variable::wave++;
+		Variable::wave = 1;
 		SCENE_MGR.ChangeScene(SceneIds::Game);
 	}
 }
