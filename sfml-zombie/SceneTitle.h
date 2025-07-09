@@ -17,13 +17,6 @@ protected:
 	float blinkTimer = 0.f;
 	bool Visible = true;
 
-	sf::RectangleShape fadeRect;
-	int fadeAlpha = 255;
-	float fadeSpeed = 255.f;
-
-	bool fadeIn = true;
-	bool fadeOut = false;
-
 public:
 	SceneTitle();
 

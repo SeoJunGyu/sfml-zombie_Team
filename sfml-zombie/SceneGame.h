@@ -25,8 +25,15 @@ protected:
 	SoundPlayer soundPlayer;
 	sf::Sprite cursor;
 	UiHud* uiHud;
+
+	sf::Text pauseText;
+	sf::Font font;
+
 	int zombieCount = 0;
 	int score = 0;
+
+	bool isPlaying = true;
+
 public:
 	SceneGame();
 	~SceneGame() = default;

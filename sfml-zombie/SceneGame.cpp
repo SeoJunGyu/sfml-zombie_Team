@@ -48,6 +48,19 @@ void SceneGame::Init()
 		zombiePool.push_back(zombie);
 	}
 
+	font = FONT_MGR.Get("fonts/zombiecontrol.ttf");
+	pauseText.setFont(font);
+	pauseText.setString("Press Enter To Continue");
+	pauseText.setCharacterSize(80);
+	pauseText.setFillColor(sf::Color(255, 224, 189));
+
+	sf::FloatRect bounds = pauseText.getLocalBounds();
+	pauseText.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
+
+	float yOffset = 0.f;
+	sf::Vector2f windowSize = FRAMEWORK.GetWindowSizeF();
+	pauseText.setPosition(windowSize.x / 2.f, windowSize.y / 2.f + yOffset);
+
 	Scene::Init();
 	score = 0;
 }
@@ -107,6 +120,23 @@ void SceneGame::Exit()
 
 void SceneGame::Update(float dt)
 {
+	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
+	{
+		Variable::wave = 1;
+		score = 0;
+		player->AllReset();
+		SCENE_MGR.ChangeScene(SceneIds::Title);
+	}
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+	{
+		isPlaying = !isPlaying;
+	}
+	if (!isPlaying)
+	{
+		return;
+	}
+
 	cursor.setPosition(ScreenToUi(InputMgr::GetMousePosition()));
 	worldView.setCenter(player->GetPosition());
 	Scene::Update(dt);
@@ -153,12 +183,6 @@ void SceneGame::Update(float dt)
 		}
 	}
 
-	//if (InputMgr::GetKeyDown(sf::Keyboard::Space))
-	//{
-	//	SpawnZombie(Variable::wave * 5);
-	//	SpawnItem(Variable::wave * 5);
-	//}
-
 }
 
 void SceneGame::Draw(sf::RenderWindow& window)
@@ -166,6 +190,10 @@ void SceneGame::Draw(sf::RenderWindow& window)
 	Scene::Draw(window);
 	window.setView(uiView);
 	window.draw(cursor);
+	if (!isPlaying)
+	{
+		window.draw(pauseText);
+	}
 }
 
 void SceneGame::SpawnZombie(int count)
