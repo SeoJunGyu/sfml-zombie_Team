@@ -4,6 +4,8 @@
 
 class SceneGame;
 class Bullet;
+class TileMap;
+class UiHud;
 
 class Player :
     public GameObject
@@ -28,6 +30,7 @@ protected:
 
 	std::list<Bullet*>bulletList;
 	std::list<Bullet*>bulletPool;
+	UiHud* uihud;
 
 	float attacInterval = 0.1f;
 	float attackTimer = 0.f;

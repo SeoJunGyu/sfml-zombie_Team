@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
+
+
 class UiHud : public GameObject
 {
 protected:
@@ -9,14 +11,15 @@ protected:
 
 	sf::Text textScore;
 	sf::Text textHighScore;
-	//TextGo* textBulletCount;
+	sf::Text textBullet;
 	sf::Text textWave;
-	sf::Text textZombieCount;
+	sf::Text textZombie;
 
 	sf::Sprite bullets;
-	//sf::RectangleShape hpBar;
+	sf::RectangleShape hpBar;
 
 
+	sf::Vector2f hpBarSize;
 
 
 public:
@@ -27,7 +30,8 @@ public:
 	void SetTextHighScore(int score);
 	void SetTextWave();
 	void SetTextZombie(int count);
-
+	void SetTextBulletCount(int count, int maxMount);
+	void SetHpBar(float value);
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float rot) override;
 	void SetScale(const sf::Vector2f& s) override;
