@@ -23,6 +23,7 @@
     <ClCompile Include="UiHud.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="SceneOption.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -90,5 +91,6 @@
     <ClInclude Include="Zombie.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="SceneOption.h" />
   </ItemGroup>
 </Project>

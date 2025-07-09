@@ -7,6 +7,9 @@ protected:
 	sf::Sprite background;
 	std::string texId = "graphics/background.png";
 
+	sf::Text titleText;
+	sf::Font font; 
+
 public:
 	SceneTitle();
 

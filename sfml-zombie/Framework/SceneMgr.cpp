@@ -4,11 +4,13 @@
 #include "SceneDev2.h"
 #include "SceneGame.h"
 #include "SceneTitle.h"
+#include "SceneOption.h"
 
 void SceneMgr::Init()
 {
 	scenes.insert({ SceneIds::Title, new SceneTitle() });
 	scenes.insert({ SceneIds::Game, new SceneGame() });
+	scenes.insert({ SceneIds::Option, new SceneOption() });
 	scenes.insert({ SceneIds::Dev1, new SceneDev1() });
 	scenes.insert({ SceneIds::Dev2, new SceneDev2() });
 
@@ -49,7 +51,6 @@ void SceneMgr::Update(float dt)
 		nextScene = SceneIds::None;
 		scenes[currentScene]->Enter();
 	}
-
 	scenes[currentScene]->Update(dt);
 }
 
