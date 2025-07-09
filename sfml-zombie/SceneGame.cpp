@@ -63,6 +63,11 @@ void SceneGame::Enter()
 	uiView.setSize(windowSize);
 	uiView.setCenter(windowSize * .5f);
 
+	if (Variable::wave == 1)
+	{
+		score = 0;
+		player->AllReset();
+	}
 	
 	Scene::Enter();
 

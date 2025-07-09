@@ -198,6 +198,16 @@ void Player::OnDamage(int damage)
 	}
 }
 
+void Player::AllReset()
+{
+	speed = 500.f;
+	maxHp = 100;
+	maxAmmo = 3;
+	ammo = 3;
+	maxReload = 6;
+	attackInterval = 0.1f;
+}
+
 void Player::Reload()
 {
 	if (maxAmmo > 0)

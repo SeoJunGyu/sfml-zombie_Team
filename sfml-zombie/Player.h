@@ -76,6 +76,7 @@ public:
 	int GetAmmo() const { return ammo; }
 	int GetMaxAmmo() const { return maxAmmo; }
 	void OnDamage(int damage);
+	void AllReset();
 
 	void Reload();
 
