@@ -22,7 +22,7 @@ void UiHud::SetTextHighScore(int score)
 {
 	
 	textHighScore.setString("High Score : " + std::to_string(score));
-	textHighScore.setPosition(1920, 0);
+	textHighScore.setPosition(1880, 0);
 	textHighScore.setCharacterSize(50);
 	Utils::SetOrigin(textHighScore, Origins::TR);
 	
@@ -109,10 +109,10 @@ void UiHud::Reset()
 	textWave.setFont(FONT_MGR.Get(FontId));
 	textBullet.setFont(FONT_MGR.Get(FontId));
 	
-	SetTextScore(Variable::score);
-	SetTextHighScore(Variable::score);
+	
+	SetTextHighScore(Variable::highScore);
 	SetTextWave();
-	SetTextZombie(10);
+	
 	
 
 	hpBarSize = { 400.f,50.f };

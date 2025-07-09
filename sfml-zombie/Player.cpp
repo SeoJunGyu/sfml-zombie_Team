@@ -160,7 +160,6 @@ void Player::OnDamage(int damage)
 	hp = Utils::Clamp(hp - damage, 0, maxHp);
 	if (hp == 0)
 	{
-		Variable::wave++;
 		SCENE_MGR.ChangeScene(SceneIds::Game);
 	}
 }
@@ -200,7 +199,7 @@ void Player::Shoot()
 	}
 	
 	bullet->Reset();
-	bullet->Fire(position + look * 10.f, look, 1000.f, 10);
+	bullet->Fire(position + look * 10.f, look, 1000.f, 100);
 
 	bulletList.push_back(bullet);
 	sceneGame->AddGameObject(bullet);

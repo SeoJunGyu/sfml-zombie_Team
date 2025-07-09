@@ -96,8 +96,16 @@ void SceneOption::SetUpViews()
 {
 	sf::Vector2f windowSize = FRAMEWORK.GetWindowSizeF();
 
+	resourceLoad();
+	TEXTURE_MGR.Load(texIds);
+	FONT_MGR.Load(fontIds);
+
+	option.setTexture(TEXTURE_MGR.Get(texId), true);
+	option.setPosition(0.f, 0.f);
+
 	uiView.setSize(windowSize);
 	uiView.setCenter(windowSize * 0.5f);
+	
 
 }
 
