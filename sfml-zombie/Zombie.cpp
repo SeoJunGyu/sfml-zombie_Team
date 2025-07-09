@@ -56,6 +56,23 @@ void Zombie::Reset()
 {
 	player = (Player*)SCENE_MGR.GetCurrentScene()->FindGameObject("Player");
 
+	if (!IsAlive())
+	{
+		switch (type)
+		{
+		case Zombie::Bloater:
+			texId = "graphics/bloater.png";
+			break;
+		case Zombie::Chaser:
+			texId = "graphics/chaser.png";
+			break;
+		case Zombie::Crawler:
+			texId = "graphics/crawler.png";
+			break;
+		}
+		SetActive(true);
+	}
+
 	body.setTexture(TEXTURE_MGR.Get(texId), true);
 	SetOrigin(Origins::MC);
 	SetPosition({ 0.f, 0.f });

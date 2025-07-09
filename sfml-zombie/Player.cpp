@@ -125,11 +125,13 @@ void Player::Update(float dt)
 	look = Utils::GetNormal(mouseWorldPos - GetPosition());
 	SetRotation(Utils::Angle(look));
 
-	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
+	attackTimer += dt;
+	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left) && attackTimer > attackInterval)
 	{
 		if (ammo > 0)
 		{
 			Shoot();
+			attackTimer = 0.f;
 			ammo--;
 			uihud->SetTextBulletCount(ammo, maxAmmo);
 		}

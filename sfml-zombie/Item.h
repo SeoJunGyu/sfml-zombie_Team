@@ -13,8 +13,9 @@ public:
 	{
 		Ammo,
 		Health,
+		None,
 	};
-	static const int TypeCount = 2;
+	static const int TypeCount = 3;
 
 protected:
 	sf::Sprite body;

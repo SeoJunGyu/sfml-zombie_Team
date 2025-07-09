@@ -52,6 +52,8 @@ public:
 
 	void SetType(Type type);
 
+	std::string GetTexId() const { return texId; }
+
 	sf::FloatRect GetLocalBounds() const override
 	{
 		return body.getLocalBounds();

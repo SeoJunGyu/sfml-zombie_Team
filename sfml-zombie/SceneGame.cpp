@@ -56,6 +56,20 @@ void SceneGame::Enter()
 	uiView.setSize(windowSize);
 	uiView.setCenter(windowSize * .5f);
 
+	auto it = zombieList.begin();
+	while (it != zombieList.end())
+	{
+		if (!(*it)->IsAlive())
+		{
+			zombiePool.push_back(*it);
+			it = zombieList.erase(it);
+		}
+		else
+		{
+			it++;
+		}
+	}
+
 	Scene::Enter();
 	cursor.setTexture(TEXTURE_MGR.Get("graphics/crosshair.png"));
 	Utils::SetOrigin(cursor, Origins::MC);
@@ -94,7 +108,7 @@ void SceneGame::Update(float dt)
 	auto it = zombieList.begin();
 	while (it != zombieList.end())
 	{
-		if (!(*it)->GetActive())
+		if ((*it)->GetTexId() == "graphics/blood.png")
 		{
 			zombiePool.push_back(*it);
 			it = zombieList.erase(it);
