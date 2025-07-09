@@ -240,7 +240,7 @@ void SceneGame::SpawnItem(int count)
 
 		item->SetType(dropType);
 		item->Reset();
-		item->SetPosition(Utils::RandomInUnitCircle() * 500.f);
+		item->SetPosition(Utils::RandomInUnitCircle() * (200.f * Variable::wave));
 		itemList.push_back(item); 
 	}
 }
