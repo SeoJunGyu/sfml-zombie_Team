@@ -3,6 +3,7 @@
 #include "SceneGame.h"
 #include "Bullet.h"
 #include "TileMap.h"
+#include "UiHud.h"
 Player::Player(const std::string& name)
 	: GameObject(name)
 {
@@ -78,7 +79,9 @@ void Player::Reset()
 	hp = maxHp;
 	look = { 1.f , 0.f };
 	
-	
+	uihud = (UiHud*)SCENE_MGR.GetCurrentScene()->FindGameObject("UiHud");
+	uihud->SetTextBulletCount(bulletCount, maxbulletCount);
+	uihud->SetHpBar((float)hp / maxHp);
 }
 
 
@@ -110,9 +113,15 @@ void Player::Update(float dt)
 	look = Utils::GetNormal(mouseWorldPos - GetPosition());
 	SetRotation(Utils::Angle(look));
 
-	if (InputMgr::GetMouseButton(sf::Mouse::Left))
+	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
 	{
 		Shoot();
+		bulletCount--;
+		std::cout << bulletCount << std::endl;
+		uihud->SetTextBulletCount(bulletCount, maxbulletCount);
+
+		
+		
 	}
 
 	hitBox.UpdateTransform(body, GetLocalBounds());
@@ -130,7 +139,7 @@ void Player::OnDamage(int damage)
 	{
 		return;
 	}
-
+	uihud->SetHpBar((float)hp/maxHp);
 	hp = Utils::Clamp(hp - damage, 0, maxHp);
 	if (hp == 0)
 	{
@@ -153,11 +162,14 @@ void Player::Shoot()
 		bulletPool.pop_front();
 		bullet->SetActive(true);
 	}
+	
+	
+	
 	bullet->Reset();
 	bullet->Fire(position + look * 10.f, look, 1000.f, 10);
 
 	bulletList.push_back(bullet);
 	sceneGame->AddGameObject(bullet);
-
+	
 
 }

@@ -46,9 +46,9 @@ void UiHud::SetTextZombie(int count)
 	Utils::SetOrigin(textZombie, Origins::BC);;
 }
 
-void UiHud::SetTextBulletCount()
+void UiHud::SetTextBulletCount(int count, int maxCount)
 {
-	textBullet.setString(std::to_string(player->GetBulletCount()) + " / " + std::to_string(player->GetMaxBulletCount()));
+	textBullet.setString(std::to_string(count) + " / " + std::to_string(maxCount));
 	textBullet.setPosition(200, 1000);
 	textBullet.setCharacterSize(50);
 	Utils::SetOrigin(textBullet, Origins::BC);
@@ -99,7 +99,7 @@ void UiHud::Release()
 void UiHud::Reset()
 {
 
-	player = (Player*)SCENE_MGR.GetCurrentScene()->FindGameObject("Player");
+	
 
 	bullets.setTexture(TEXTURE_MGR.Get(BulletsId));
 	bullets.setPosition(0, 950);
@@ -113,7 +113,7 @@ void UiHud::Reset()
 	SetTextHighScore(Variable::score);
 	SetTextWave();
 	SetTextZombie(10);
-	SetTextBulletCount();
+	
 
 	hpBarSize = { 400.f,50.f };
 	hpBar.setFillColor(sf::Color::Red);

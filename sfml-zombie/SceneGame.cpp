@@ -74,7 +74,6 @@ void SceneGame::Update(float dt)
 {
 	cursor.setPosition(ScreenToUi(InputMgr::GetMousePosition()));
 	Scene::Update(dt);
-	Scene::Update(dt);
 	//std::cout << player->GetPosition().x << ", " << player->GetPosition().y << std::endl;
 
 	auto it = zombieList.begin();

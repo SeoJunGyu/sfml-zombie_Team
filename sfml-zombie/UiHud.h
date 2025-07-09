@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-class Player;
+
 
 class UiHud : public GameObject
 {
@@ -18,7 +18,7 @@ protected:
 	sf::Sprite bullets;
 	sf::RectangleShape hpBar;
 
-	Player* player;
+
 	sf::Vector2f hpBarSize;
 
 
@@ -30,8 +30,8 @@ public:
 	void SetTextHighScore(int score);
 	void SetTextWave();
 	void SetTextZombie(int count);
-	void SetTextBulletCount();
-
+	void SetTextBulletCount(int count, int maxMount);
+	void SetHpBar(float value);
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float rot) override;
 	void SetScale(const sf::Vector2f& s) override;
