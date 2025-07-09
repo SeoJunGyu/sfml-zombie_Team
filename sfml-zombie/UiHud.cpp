@@ -14,7 +14,7 @@ void UiHud::SetTextScore(int score)
 	textScore.setPosition(0, 0);
 	textScore.setCharacterSize(50);
 	
-	Utils::SetOrigin(textHighScore, Origins::TL);
+	Utils::SetOrigin(textScore, Origins::TL);
 }
 
 void UiHud::SetTextHighScore(int score)
@@ -30,7 +30,7 @@ void UiHud::SetTextHighScore(int score)
 void UiHud::SetTextWave()
 {
 	textWave.setFont(FONT_MGR.Get(FontId));
-	textWave.setString("Wave : " + std::to_string(Variables::wave));
+	textWave.setString("Wave : " + std::to_string(Variable::wave));
 	textWave.setPosition(1400, 1000);
 	textWave.setCharacterSize(50);
 	Utils::SetOrigin(textWave, Origins::BC);;
@@ -91,9 +91,9 @@ void UiHud::Reset()
 	bullets.setPosition(0, 950);
 
 	
-	SetTextScore(Variables::score);
+	SetTextScore(Variable::score);
 	
-	SetTextHighScore(Variables::score);
+	SetTextHighScore(Variable::score);
 	SetTextWave();
 	SetTextZombie(10);
 	

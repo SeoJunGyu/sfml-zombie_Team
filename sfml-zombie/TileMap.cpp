@@ -123,7 +123,7 @@ void TileMap::Release()
 
 void TileMap::Reset()
 {
-	Set({ Variables::wave * 10, Variables::wave * 10 }, { 50.f, 50.f });
+	Set({ Variable::wave * 10, Variable::wave * 10 }, { 50.f, 50.f });
 	
 	texture = &TEXTURE_MGR.Get(spriteSheetId);
 	
