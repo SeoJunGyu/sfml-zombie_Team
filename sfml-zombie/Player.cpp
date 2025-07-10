@@ -84,7 +84,7 @@ void Player::Reset()
 	look = { 1.f , 0.f };
 	if (Variable::fireRateBoost)
 	{
-		attackInterval = 0.05f;  // 발사 간격 빨라짐
+		attackInterval = Utils::Clamp(attackInterval - 0.1f, 0.1f, 1.f);  // 발사 간격 빨라짐
 		Variable::fireRateBoost = false;
 	} 
 
@@ -156,7 +156,7 @@ void Player::Update(float dt)
 	SetRotation(Utils::Angle(look));
 
 	attackTimer += dt;
-	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left) && attackTimer > attackInterval)
+	if (InputMgr::GetMouseButton(sf::Mouse::Left) && attackTimer > attackInterval)
 	{
 		if (ammo > 0)
 		{
@@ -205,7 +205,7 @@ void Player::AllReset()
 	maxAmmo = 3;
 	ammo = 3;
 	maxReload = 6;
-	attackInterval = 0.1f;
+	attackInterval = 1.f;
 }
 
 void Player::Reload()

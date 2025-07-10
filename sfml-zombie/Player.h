@@ -35,7 +35,7 @@ protected:
 	std::list<Bullet*>bulletPool;
 	UiHud* uihud;
 
-	float attackInterval = 0.1f;
+	float attackInterval = 1.f;
 	float attackTimer = 0.f;
 
 	TileMap* tileMap;
