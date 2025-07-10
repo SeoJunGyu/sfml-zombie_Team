@@ -3,7 +3,7 @@
 
 bool Variable::isDrawHitBox = false;
 int Variable::wave = 1;
-int Variable::highScore = 300;
+int Variable::highScore = 100;
 int Variable::score = 0;
 
 bool Variable::fireRateBoost = false;

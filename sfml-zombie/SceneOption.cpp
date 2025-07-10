@@ -78,7 +78,7 @@ void SceneOption::Update(float dt)
 		auto& text = optionTexts[i];
 		if (text.getGlobalBounds().contains(worldPos))
 		{
-			text.setFillColor(sf::Color::Red); // hover
+			text.setFillColor(sf::Color::Red); 
 			text.setScale(1.1f, 1.1f);
 			if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
 			{

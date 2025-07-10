@@ -39,6 +39,11 @@ protected:
 
 	SoundPlayer soundPlayer;
 
+	sf::RectangleShape hpBar;
+	sf::Vector2f hpBarSize = { 20.f, 5.f };
+
+	bool barActive = false;
+
 public:
 	Zombie(const std::string& name = "");
 	virtual ~Zombie() = default;
@@ -75,5 +80,7 @@ public:
 	bool IsAlive() { return hp > 0; }
 	bool GetAlive() const { return isAlive; }
 	void SetAlive(bool live) { isAlive = live; }
+	void SetIsHpVisibal();
+	void HpSetSize();
 };
 

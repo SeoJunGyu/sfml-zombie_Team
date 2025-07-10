@@ -10,7 +10,7 @@ void TileMap::Set(const sf::Vector2i& count, const sf::Vector2f& size)
 {
 	rs.setSize({ (count.x - 3) * size.x, (count.y - 3) * size.x });
 	Utils::SetOrigin(rs, Origins::MC);
-	
+	rs.setFillColor(sf::Color::Red);
 	cellCount = count;
 	cellSize = size;
 	va.clear();
@@ -154,6 +154,7 @@ void TileMap::Draw(sf::RenderWindow& window)
 	state.texture = texture;
 	state.transform = transform;
 	window.draw(va, state);
+	window.draw(rs);
 	
 
 	
