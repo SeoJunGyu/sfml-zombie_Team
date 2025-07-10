@@ -215,17 +215,11 @@ void SceneGame::SpawnItem(int count)
 		int healthWeight = 6;
 		int otherWeight = 2;
 
-		if (Variable::betterAmmoDrops) ammoWeight += 14;
-		if (Variable::betterHealthDrops) healthWeight += 14;
+		if (Variable::betterAmmoDrops) ammoWeight += 10;
+		if (Variable::betterHealthDrops) healthWeight += 10;
 
 		int totalWeight = ammoWeight + healthWeight + otherWeight;
 		int rand = Utils::RandomRange(0, totalWeight);
-
-		std::cout << "[SpawnItem] ammoWeight=" << ammoWeight
-			<< ", healthWeight=" << healthWeight
-			<< ", otherWeight=" << otherWeight
-			<< ", totalWeight=" << totalWeight
-			<< ", rand=" << rand << std::endl;
 
 		Item::Type dropType = Item::Type::None;
 
@@ -241,8 +235,6 @@ void SceneGame::SpawnItem(int count)
 		{
 			dropType = (Item::Type)Utils::RandomRange(0, Item::Type::Count);
 		}
-
-		std::cout << "[SpawnItem] DropType=" << (int)dropType << std::endl;
 
 		item->SetType(dropType);
 		item->Reset();

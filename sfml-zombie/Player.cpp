@@ -156,7 +156,7 @@ void Player::Update(float dt)
 	SetRotation(Utils::Angle(look));
 
 	attackTimer += dt;
-	if (InputMgr::GetMouseButton(sf::Mouse::Left) && attackTimer > attackInterval)
+	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left) && attackTimer > attackInterval)
 	{
 		if (ammo > 0)
 		{

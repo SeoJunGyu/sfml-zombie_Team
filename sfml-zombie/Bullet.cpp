@@ -88,6 +88,7 @@ void Bullet::Update(float dt)
 		{
 			SetActive(false);
 			zombie->OnDamage(damage);
+			zombie->SetIsHpVisibal();
 			break;
 		}
 	}

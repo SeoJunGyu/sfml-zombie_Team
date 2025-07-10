@@ -18,7 +18,6 @@ protected:
 	sf::Sprite bullets;
 	sf::RectangleShape hpBar;
 
-
 	sf::Vector2f hpBarSize;
 
 

@@ -55,6 +55,12 @@ void Zombie::Release()
 
 void Zombie::Reset()
 {
+	barActive = false;
+
+	Utils::SetOrigin(hpBar,Origins::ML);
+	hpBar.setPosition(position);
+	hpBar.setFillColor(sf::Color::Red);
+
 	player = (Player*)SCENE_MGR.GetCurrentScene()->FindGameObject("Player");
 
 	isAlive = true;
@@ -106,11 +112,16 @@ void Zombie::Update(float dt)
 			}
 		}
 	}
+	hpBar.setPosition(GetPosition());
 }
 
 void Zombie::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
+	if (barActive)
+	{
+		window.draw(hpBar);
+	}
 	hitBox.Draw(window);
 }
 
@@ -159,3 +170,13 @@ void Zombie::OnDamage(int damage)
 		body.setTexture(TEXTURE_MGR.Get(texId));
 	}
 }
+
+void Zombie::SetIsHpVisibal()
+{
+	barActive = true;
+}
+
+//void Zombie::HpSetSize()
+//{
+//	hpBar.setSize()
+//}
